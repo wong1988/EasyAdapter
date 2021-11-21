@@ -1,0 +1,3 @@
+rootProject.name = "EasyAdapterSample"
+include ':app'
+include ':EasyAdapter'
