@@ -4,6 +4,18 @@
  ## Method and Attribute
 
 ```
+// 添加数据
+addData()
+// 移除指定位置数据
+remove(int position)
+// 清空数据源
+clearAll()
+// 获取绑定的xxx，如数据源长度，context，RecyclerView等
+getAttachXXX()
+// 添加头、脚布局
+addHeaderView() addFooterView()
+// 移除头、脚布局
+removeHeader() removeAllHeaders() removeFooter() removeAllFooters()
 // 设置加载状态的资源，可以是drawable/mipmap下的图片资源，也可以是raw下的json动画资源
 // 自适应图片大小，最大50dp
 setLoadingRes(int loadingRes)
