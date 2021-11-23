@@ -1,5 +1,17 @@
 # EasyAdapter
  一个通用简易的RecyclerView适配器
+ 
+ ## Method and Attribute
+
+
+监听器
+```
+1. OnItemClickListener() Item的点击事件
+2. OnItemLongClickListener() Item的长按点击事件
+3. OnLoadMoreListener() 上拉加载的监听事件
+4. OnScrollListener() 列表的滚动监听事件
+5. OnStateFooterClickListener(LoadState state) 加载状态脚布局点击的监听
+```
 
 
 ## About
