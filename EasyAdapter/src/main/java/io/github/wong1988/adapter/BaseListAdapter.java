@@ -706,8 +706,6 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerVi
 
     /**
      * 添加数据源
-     *
-     * @param data collection containing elements to be added to this list
      */
     public final void addData(List<T> data) {
 
