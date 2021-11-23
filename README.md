@@ -49,4 +49,4 @@ setEmptyText()
 
 注意：
 1. 当RecyclerView与Adapter绑定时，内部会给RecyclerView设置滚动监听addOnScrollListener()，进行上拉监听管理。如需使用滚动监听进行一些自定义操作，请调用EasyAdapter的addOnScrollListener()进行监听【而非RecyclerView的addOnScrollListener()】。
-2. setAdapter()前需要先设置LayoutManager，内部会根据LayoutManger进行选择适当的加载状态脚布局【横向、纵向】，且横向纵向一经
+2. setAdapter()前需要先设置LayoutManager，内部会根据LayoutManger进行选择适当的加载状态脚布局【横向、纵向】
