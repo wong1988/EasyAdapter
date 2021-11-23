@@ -21,6 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
+            android:adjustViewBounds="true"
             app:lottie_autoPlay="false"
             app:lottie_loop="true" />
 
@@ -97,6 +98,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
+            android:adjustViewBounds="true"
             app:lottie_autoPlay="false"
             app:lottie_loop="false" />
 
@@ -128,6 +130,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
+            android:adjustViewBounds="true"
             app:lottie_autoPlay="false"
             app:lottie_loop="false" />
 

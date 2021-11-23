@@ -73,7 +73,8 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerVi
     // 加载到底资源
     private String mEndText = "END";
     // 加载出错资源
-    private int mErrorRes = R.raw.wong_state_error;
+    private int mErrorRes = R.raw.wong_state_error_h;
+    private boolean mErrorResSet = false;
     private String mErrorText = "";
     private boolean mErrorTextSet;
     // 无数据资源
@@ -156,9 +157,13 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerVi
             if (manager instanceof LinearLayoutManager && ((LinearLayoutManager) manager).getOrientation() == RecyclerView.HORIZONTAL) {
                 mStateFooterLayout = R.layout.wong_recycle_item_foot_h;
                 wrapParams = new LinearLayout.LayoutParams(WRAP_CONTENT, MATCH_PARENT);
+                if (!mErrorResSet)
+                    mErrorRes = R.raw.wong_state_error_h;
             } else {
                 mStateFooterLayout = R.layout.wong_recycle_item_foot_v;
                 wrapParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                if (!mErrorResSet)
+                    mErrorRes = R.raw.wong_state_error_v;
             }
             View view = mInflater.inflate(mStateFooterLayout, parent, false);
             view.setOnClickListener(new View.OnClickListener() {
@@ -238,7 +243,6 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerVi
                     footViewHolder.setVisibility(R.id.end_layout, View.GONE);
                     footViewHolder.setVisibility(R.id.error_layout, View.GONE);
                     footViewHolder.setVisibility(R.id.no_data_layout, View.GONE);
-                    footViewHolder.setText(R.id.error_tv, mEndText);
                     loadingView.pauseAnimation();
                     emptyView.pauseAnimation();
                     errorView.pauseAnimation();
@@ -249,6 +253,7 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerVi
                     footViewHolder.setVisibility(R.id.end_layout, View.VISIBLE);
                     footViewHolder.setVisibility(R.id.error_layout, View.GONE);
                     footViewHolder.setVisibility(R.id.no_data_layout, View.GONE);
+                    footViewHolder.setText(R.id.end_tv, mEndText);
                     loadingView.pauseAnimation();
                     emptyView.pauseAnimation();
                     errorView.pauseAnimation();
@@ -900,6 +905,7 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerVi
     @SuppressLint("NotifyDataSetChanged")
     public final void setErrorRes(int errorRes) {
         this.mErrorRes = errorRes;
+        this.mErrorResSet = true;
         notifyDataSetChanged();
     }
 
