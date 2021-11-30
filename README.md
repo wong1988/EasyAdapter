@@ -21,6 +21,8 @@ onBindViewHolders(RecyclerViewHolder holder, int viewType, T t, int position);
 addData()
 // 移除指定位置数据
 remove(int position)
+// 更新指定位置数据
+update(int position, T t)
 // 清空数据源
 clearAll()
 // 获取绑定的xxx，如数据源长度，context，RecyclerView等
@@ -63,4 +65,4 @@ setEmptyText()
 注意：
 1. 当RecyclerView与Adapter绑定时，内部会给RecyclerView设置滚动监听addOnScrollListener()，进行上拉监听管理。如需使用滚动监听进行一些自定义操作，请调用EasyAdapter的addOnScrollListener()进行监听【而非RecyclerView的addOnScrollListener()】。
 2. setAdapter()前需要先设置LayoutManager，内部会根据LayoutManger进行选择适当的加载状态脚布局【横向、纵向】
-3. 内部对getItemCount()进行了处理，所以适配器参数返回的position并不一定是真实的position，如果使用notifyItemRangeChanged(),notifyItemInserted()等方法可能达不到预期的效果（notifyDataSetChanged方法不影响）。
+3. 内部对getItemCount()进行了处理，所以适配器参数返回的position并不一定是真实的position，如果使用notifyItemRangeChanged()，notifyItemInserted()等方法可能达不到预期的效果（notifyDataSetChanged方法不影响）。如果一定要使用，可通过getRealPosition()返回真正的position，再去调用notifyXXX()方法。推荐使用addData()，remove()，update()等方法，方法内部会触发自动刷新适配器。
