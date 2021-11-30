@@ -3,6 +3,14 @@
  
  ## Method and Attribute
 
+构造方法
+```
+// 默认支持上拉加载，如果列表无分页的功能，推荐使用2参构造，并传false
+BaseListAdapter(Context context)
+// 参数2：是否支持上拉加载
+BaseListAdapter(Context context, boolean enableLoadMore)
+```
+
 ```
 // 添加数据
 addData()
