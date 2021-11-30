@@ -10,7 +10,12 @@ BaseListAdapter(Context context)
 // 参数2：是否支持上拉加载
 BaseListAdapter(Context context, boolean enableLoadMore)
 ```
-
+实现方法
+```
+// position只是在数据源中的位置，非实际位置（包含头布局时）
+onBindViewHolders(RecyclerViewHolder holder, int viewType, T t, int position);
+```
+常用方法
 ```
 // 添加数据
 addData()
@@ -58,3 +63,4 @@ setEmptyText()
 注意：
 1. 当RecyclerView与Adapter绑定时，内部会给RecyclerView设置滚动监听addOnScrollListener()，进行上拉监听管理。如需使用滚动监听进行一些自定义操作，请调用EasyAdapter的addOnScrollListener()进行监听【而非RecyclerView的addOnScrollListener()】。
 2. setAdapter()前需要先设置LayoutManager，内部会根据LayoutManger进行选择适当的加载状态脚布局【横向、纵向】
+3. 内部对getItemCount()进行了处理，所以适配器参数返回的position并不一定是真实的position，如果使用notifyItemRangeChanged(),notifyItemInserted()等方法可能达不到预期的效果（notifyDataSetChanged方法不影响）。
