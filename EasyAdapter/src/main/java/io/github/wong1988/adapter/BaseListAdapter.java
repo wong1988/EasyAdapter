@@ -68,13 +68,11 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerVi
     private final int TYPE_LOAD_STATE_FOOTER = Integer.MAX_VALUE;
     // loading资源
     private int mLoadingRes = R.raw.wong_state_loading;
-    private String mLoadingText = "";
-    private boolean mLoadingTextSet;
+    private String mLoadingText = "加载中";
     // 加载到底资源
     private String mEndText = "END";
     // 加载出错资源
-    private int mErrorRes = R.raw.wong_state_error_h;
-    private boolean mErrorResSet = false;
+    private int mErrorRes = R.raw.wong_state_error;
     private String mErrorText = "";
     private boolean mErrorTextSet;
     // 无数据资源
@@ -118,6 +116,7 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerVi
     // ******** 获取item的数量 ********
     @Override
     public final int getItemCount() {
+        // 头布局+数据源+脚布局+状态布局
         return getHeaderLayoutCount() + mData.size() + getFooterLayoutCount() + getLoadStateViewCount();
     }
 
@@ -155,15 +154,12 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerVi
         if (viewType == TYPE_LOAD_STATE_FOOTER) {
             RecyclerView.LayoutManager manager = mRecyclerView.getLayoutManager();
             if (manager instanceof LinearLayoutManager && ((LinearLayoutManager) manager).getOrientation() == RecyclerView.HORIZONTAL) {
+                // 使用对应的脚布局文件
                 mStateFooterLayout = R.layout.wong_recycle_item_foot_h;
                 wrapParams = new LinearLayout.LayoutParams(WRAP_CONTENT, MATCH_PARENT);
-                if (!mErrorResSet)
-                    mErrorRes = R.raw.wong_state_error_h;
             } else {
                 mStateFooterLayout = R.layout.wong_recycle_item_foot_v;
                 wrapParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                if (!mErrorResSet)
-                    mErrorRes = R.raw.wong_state_error_v;
             }
             View view = mInflater.inflate(mStateFooterLayout, parent, false);
             view.setOnClickListener(new View.OnClickListener() {
@@ -217,15 +213,7 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerVi
                     footViewHolder.setVisibility(R.id.end_layout, View.GONE);
                     footViewHolder.setVisibility(R.id.error_layout, View.GONE);
                     footViewHolder.setVisibility(R.id.no_data_layout, View.GONE);
-                    if (mLoadingTextSet)
-                        footViewHolder.setText(R.id.loading_tv, mLoadingText);
-                    else {
-                        RecyclerView.LayoutManager manager = mRecyclerView.getLayoutManager();
-                        if (manager instanceof LinearLayoutManager && ((LinearLayoutManager) manager).getOrientation() == RecyclerView.HORIZONTAL)
-                            footViewHolder.setText(R.id.loading_tv, "加载中");
-                        else
-                            footViewHolder.setText(R.id.loading_tv, "加载中…");
-                    }
+                    footViewHolder.setText(R.id.loading_tv, mLoadingText);
                     String resourceTypeName = mContext.getResources().getResourceTypeName(mLoadingRes);
                     if (resourceTypeName.equals("mipmap") || resourceTypeName.equals("drawable")) {
                         loadingView.setImageResource(mLoadingRes);
@@ -271,7 +259,7 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerVi
                         if (manager instanceof LinearLayoutManager && ((LinearLayoutManager) manager).getOrientation() == RecyclerView.HORIZONTAL)
                             footViewHolder.setText(R.id.error_tv, "查看更多");
                         else
-                            footViewHolder.setText(R.id.error_tv, "加载失败，点击重试");
+                            footViewHolder.setText(R.id.error_tv, "载入失败，点击重试");
                     }
                     String resourceTypeName2 = mContext.getResources().getResourceTypeName(mErrorRes);
                     if (resourceTypeName2.equals("mipmap") || resourceTypeName2.equals("drawable")) {
@@ -776,6 +764,15 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerVi
     }
 
     /**
+     * 更新指定位置的数据
+     */
+    public final void update(int position, T t) {
+        mData.set(position, t);
+        // 通知刷新，刷新位置为当前改动数据源的真正位置
+        notifyItemRangeChanged(position + getHeaderLayoutCount(), 1);
+    }
+
+    /**
      * 获取数据源的方法,尽量不要使用此方法操作数据
      * 如内部提供的方法不能够满足，再使用此方式获取数据源进行操作
      */
@@ -786,7 +783,7 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerVi
     /**
      * 获取指定位置的实体类，请注意判空处理
      */
-    public final T getData(int position) {
+    public final T getAttachData(int position) {
         return position < 0 || position + 1 > mData.size() ? null : mData.get(position);
     }
 
@@ -866,7 +863,8 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerVi
     @SuppressLint("NotifyDataSetChanged")
     public final void setLoadState(LoadState loadState) {
         this.loadState = loadState;
-        notifyDataSetChanged();
+        // 刷新指定位置
+        notifyItemRangeChanged(getHeaderLayoutCount() + mData.size() + getFooterLayoutCount(), 1);
     }
 
     /**
@@ -875,7 +873,8 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerVi
     @SuppressLint("NotifyDataSetChanged")
     public final void setLoadingRes(int loadingRes) {
         this.mLoadingRes = loadingRes;
-        notifyDataSetChanged();
+        // 刷新指定位置
+        notifyItemRangeChanged(getHeaderLayoutCount() + mData.size() + getFooterLayoutCount(), 1);
     }
 
     /**
@@ -884,8 +883,8 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerVi
     @SuppressLint("NotifyDataSetChanged")
     public final void setLoadingText(String text) {
         this.mLoadingText = TextUtils.isEmpty(text) ? "" : text;
-        this.mLoadingTextSet = true;
-        notifyDataSetChanged();
+        // 刷新指定位置
+        notifyItemRangeChanged(getHeaderLayoutCount() + mData.size() + getFooterLayoutCount(), 1);
     }
 
     /**
@@ -894,7 +893,8 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerVi
     @SuppressLint("NotifyDataSetChanged")
     public final void setEndText(String text) {
         this.mEndText = TextUtils.isEmpty(text) ? "" : text;
-        notifyDataSetChanged();
+        // 刷新指定位置
+        notifyItemRangeChanged(getHeaderLayoutCount() + mData.size() + getFooterLayoutCount(), 1);
     }
 
     /**
@@ -903,8 +903,8 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerVi
     @SuppressLint("NotifyDataSetChanged")
     public final void setErrorRes(int errorRes) {
         this.mErrorRes = errorRes;
-        this.mErrorResSet = true;
-        notifyDataSetChanged();
+        // 刷新指定位置
+        notifyItemRangeChanged(getHeaderLayoutCount() + mData.size() + getFooterLayoutCount(), 1);
     }
 
     /**
@@ -914,7 +914,8 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerVi
     public final void setErrorText(String text) {
         this.mErrorText = TextUtils.isEmpty(text) ? "" : text;
         this.mErrorTextSet = true;
-        notifyDataSetChanged();
+        // 刷新指定位置
+        notifyItemRangeChanged(getHeaderLayoutCount() + mData.size() + getFooterLayoutCount(), 1);
     }
 
     /**
@@ -923,7 +924,8 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerVi
     @SuppressLint("NotifyDataSetChanged")
     public final void setEmptyRes(int emptyRes) {
         this.mEmptyRes = emptyRes;
-        notifyDataSetChanged();
+        // 刷新指定位置
+        notifyItemRangeChanged(getHeaderLayoutCount() + mData.size() + getFooterLayoutCount(), 1);
     }
 
     /**
@@ -932,7 +934,12 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerVi
     @SuppressLint("NotifyDataSetChanged")
     public final void setEmptyText(String text) {
         this.mEmptyText = TextUtils.isEmpty(text) ? "" : text;
-        notifyDataSetChanged();
+        // 刷新指定位置
+        notifyItemRangeChanged(getHeaderLayoutCount() + mData.size() + getFooterLayoutCount(), 1);
+    }
+
+    public final int getRealPosition(int position) {
+        return position + getHeaderLayoutCount();
     }
 
     private static class HeaderViewHolder extends RecyclerViewHolder {
