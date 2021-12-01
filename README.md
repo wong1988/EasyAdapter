@@ -14,7 +14,7 @@
  Step 2. Add the dependency
  ```
  dependencies {
-     implementation 'com.github.wong1988:EasyAdapter:0.0.4'
+     implementation 'com.github.wong1988:EasyAdapter:0.0.5'
      // 动画插件包
      implementation 'com.airbnb.android:lottie:4.2.1'
  }
@@ -25,6 +25,10 @@
 
 
  ## Change Log
+ 
+  0.0.5:
+
+ * 去除默认error动画的背景色
 
  0.0.4:
 
