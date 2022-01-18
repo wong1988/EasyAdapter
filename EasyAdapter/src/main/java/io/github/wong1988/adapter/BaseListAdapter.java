@@ -505,7 +505,7 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerVi
 
     // 获取脚布局的刷新位置
     private int getFooterPosition() {
-        int position = getItemCount() - getLoadStateViewCount() - 1;
+        int position = getItemCount() - getFooterLayoutCount() - getLoadStateViewCount();
         return Math.max(position, 0);
     }
 
