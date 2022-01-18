@@ -1,5 +1,8 @@
 package io.github.wong1988.adapter;
 
+import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
+import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.text.TextUtils;
@@ -30,9 +33,6 @@ import io.github.wong1988.adapter.listener.OnItemLongClickListener;
 import io.github.wong1988.adapter.listener.OnLoadMoreListener;
 import io.github.wong1988.adapter.listener.OnScrollListener;
 import io.github.wong1988.adapter.listener.OnStateFooterClickListener;
-
-import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
-import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 
 public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerViewHolder> implements View.OnClickListener, View.OnLongClickListener {
@@ -214,13 +214,20 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerVi
                     footViewHolder.setVisibility(R.id.error_layout, View.GONE);
                     footViewHolder.setVisibility(R.id.no_data_layout, View.GONE);
                     footViewHolder.setText(R.id.loading_tv, mLoadingText);
-                    String resourceTypeName = mContext.getResources().getResourceTypeName(mLoadingRes);
+                    String resourceTypeName = "";
+                    try {
+                        resourceTypeName = mContext.getResources().getResourceTypeName(mLoadingRes);
+                    } catch (Exception ignored) {
+                    }
                     if (resourceTypeName.equals("mipmap") || resourceTypeName.equals("drawable")) {
                         loadingView.setImageResource(mLoadingRes);
                         loadingView.pauseAnimation();
                     } else if (resourceTypeName.equals("raw")) {
                         loadingView.setAnimation(mLoadingRes);
                         loadingView.playAnimation();
+                    } else {
+                        loadingView.setImageResource(0);
+                        loadingView.pauseAnimation();
                     }
                     emptyView.pauseAnimation();
                     errorView.pauseAnimation();
@@ -261,13 +268,20 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerVi
                         else
                             footViewHolder.setText(R.id.error_tv, "载入失败，点击重试");
                     }
-                    String resourceTypeName2 = mContext.getResources().getResourceTypeName(mErrorRes);
+                    String resourceTypeName2 = "";
+                    try {
+                        resourceTypeName2 = mContext.getResources().getResourceTypeName(mErrorRes);
+                    } catch (Exception ignored) {
+                    }
                     if (resourceTypeName2.equals("mipmap") || resourceTypeName2.equals("drawable")) {
                         errorView.setImageResource(mErrorRes);
                         errorView.pauseAnimation();
                     } else if (resourceTypeName2.equals("raw")) {
                         errorView.setAnimation(mErrorRes);
                         errorView.playAnimation();
+                    } else {
+                        errorView.setImageResource(0);
+                        errorView.pauseAnimation();
                     }
                     loadingView.pauseAnimation();
                     emptyView.pauseAnimation();
@@ -279,13 +293,20 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerVi
                     footViewHolder.setVisibility(R.id.error_layout, View.GONE);
                     footViewHolder.setVisibility(R.id.no_data_layout, View.VISIBLE);
                     footViewHolder.setText(R.id.none_tv, mEmptyText);
-                    String resourceTypeName3 = mContext.getResources().getResourceTypeName(mEmptyRes);
+                    String resourceTypeName3 = "";
+                    try {
+                        resourceTypeName3 = mContext.getResources().getResourceTypeName(mEmptyRes);
+                    } catch (Exception ignored) {
+                    }
                     if (resourceTypeName3.equals("mipmap") || resourceTypeName3.equals("drawable")) {
                         emptyView.setImageResource(mEmptyRes);
                         emptyView.pauseAnimation();
                     } else if (resourceTypeName3.equals("raw")) {
                         emptyView.setAnimation(mEmptyRes);
                         emptyView.playAnimation();
+                    } else {
+                        emptyView.setImageResource(0);
+                        emptyView.pauseAnimation();
                     }
                     loadingView.pauseAnimation();
                     errorView.pauseAnimation();
