@@ -82,7 +82,6 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerVi
     private OnStateFooterClickListener mStateListener;
     // params
     private LinearLayout.LayoutParams wrapParams;
-    private final LinearLayout.LayoutParams matchParams;
     private final LinearLayout.LayoutParams noParams;
     //用来标记是否正在向上滑动
     private boolean mIsSlidingUpward = false;
@@ -109,7 +108,6 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerVi
         this.mEnableLoadMore = enableLoadMore;
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         wrapParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        matchParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         noParams = new LinearLayout.LayoutParams(0, 0);
     }
 
@@ -287,7 +285,7 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerVi
                     emptyView.pauseAnimation();
                     break;
                 case LOAD_NO_DATA:
-                    layout.setLayoutParams(matchParams);
+                    layout.setLayoutParams(wrapParams);
                     footViewHolder.setVisibility(R.id.loading_layout, View.GONE);
                     footViewHolder.setVisibility(R.id.end_layout, View.GONE);
                     footViewHolder.setVisibility(R.id.error_layout, View.GONE);

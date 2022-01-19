@@ -14,7 +14,7 @@
  Step 2. Add the dependency
  ```
  dependencies {
-     implementation 'com.github.wong1988:EasyAdapter:0.0.7'
+     implementation 'com.github.wong1988:EasyAdapter:0.0.8'
      // 动画插件包
      implementation 'com.airbnb.android:lottie:4.2.1'
  }
@@ -26,10 +26,11 @@
 
  ## Change Log
  
-  0.0.7:
+  0.0.8:
 
  * 优化传入的图片资源找不到时进行crash拦截
  * 修复移除脚布局crash的bug
+ * 优化空布局时的显示效果
 
   0.0.5:
 
