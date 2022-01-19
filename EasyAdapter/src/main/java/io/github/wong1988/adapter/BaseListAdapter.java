@@ -83,6 +83,7 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerVi
     // params
     private LinearLayout.LayoutParams wrapParams;
     private final LinearLayout.LayoutParams noParams;
+    private LinearLayout.LayoutParams emptyParams;
     //用来标记是否正在向上滑动
     private boolean mIsSlidingUpward = false;
     //用来标记是否正在向右滑动
@@ -108,6 +109,7 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerVi
         this.mEnableLoadMore = enableLoadMore;
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         wrapParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        emptyParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, MATCH_PARENT);
         noParams = new LinearLayout.LayoutParams(0, 0);
     }
 
@@ -155,9 +157,11 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerVi
                 // 使用对应的脚布局文件
                 mStateFooterLayout = R.layout.wong_recycle_item_foot_h;
                 wrapParams = new LinearLayout.LayoutParams(WRAP_CONTENT, MATCH_PARENT);
+                emptyParams = new LinearLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT);
             } else {
                 mStateFooterLayout = R.layout.wong_recycle_item_foot_v;
                 wrapParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                emptyParams = new LinearLayout.LayoutParams(MATCH_PARENT, WRAP_CONTENT);
             }
             View view = mInflater.inflate(mStateFooterLayout, parent, false);
             view.setOnClickListener(new View.OnClickListener() {
@@ -285,7 +289,7 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerVi
                     emptyView.pauseAnimation();
                     break;
                 case LOAD_NO_DATA:
-                    layout.setLayoutParams(wrapParams);
+                    layout.setLayoutParams(emptyParams);
                     footViewHolder.setVisibility(R.id.loading_layout, View.GONE);
                     footViewHolder.setVisibility(R.id.end_layout, View.GONE);
                     footViewHolder.setVisibility(R.id.error_layout, View.GONE);
