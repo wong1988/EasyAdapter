@@ -1,8 +1,5 @@
 package io.github.wong1988.adapter;
 
-import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
-import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.text.TextUtils;
@@ -33,6 +30,9 @@ import io.github.wong1988.adapter.listener.OnItemLongClickListener;
 import io.github.wong1988.adapter.listener.OnLoadMoreListener;
 import io.github.wong1988.adapter.listener.OnScrollListener;
 import io.github.wong1988.adapter.listener.OnStateFooterClickListener;
+
+import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
+import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 
 public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerViewHolder> implements View.OnClickListener, View.OnLongClickListener {
@@ -517,6 +517,11 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerVi
             return 0;
         }
         return 1;
+    }
+
+    // 是否绘制了头布局
+    public boolean isCanvasHeader() {
+        return mHeaderLayout != null && mHeaderLayout.getChildCount() != 0;
     }
 
     // 获取用户自定义脚布局数量

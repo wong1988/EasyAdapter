@@ -14,7 +14,7 @@
  Step 2. Add the dependency
  ```
  dependencies {
-     implementation 'com.github.wong1988:EasyAdapter:0.0.9'
+     implementation 'com.github.wong1988:EasyAdapter:0.1.0'
      // 动画插件包
      implementation 'com.airbnb.android:lottie:4.2.1'
  }
@@ -26,6 +26,10 @@
 
  ## Change Log
  
+  0.1.0:
+
+ * 新增LinearLayoutManager -> vertical 分割线
+
   0.0.9:
 
  * 优化传入的图片资源找不到时进行crash拦截
