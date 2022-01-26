@@ -14,7 +14,7 @@
  Step 2. Add the dependency
  ```
  dependencies {
-     implementation 'com.github.wong1988:EasyAdapter:0.1.1'
+     implementation 'com.github.wong1988:EasyAdapter:1.0.1'
      // 动画插件包
      implementation 'com.airbnb.android:lottie:4.2.1'
  }
