@@ -1,5 +1,8 @@
 package io.github.wong1988.adapter;
 
+import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
+import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.text.TextUtils;
@@ -30,9 +33,6 @@ import io.github.wong1988.adapter.listener.OnItemLongClickListener;
 import io.github.wong1988.adapter.listener.OnLoadMoreListener;
 import io.github.wong1988.adapter.listener.OnScrollListener;
 import io.github.wong1988.adapter.listener.OnStateFooterClickListener;
-
-import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
-import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 
 public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerViewHolder> implements View.OnClickListener, View.OnLongClickListener {

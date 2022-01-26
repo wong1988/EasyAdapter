@@ -14,7 +14,7 @@
  Step 2. Add the dependency
  ```
  dependencies {
-     implementation 'com.github.wong1988:EasyAdapter:0.1.0'
+     implementation 'com.github.wong1988:EasyAdapter:0.1.1'
      // 动画插件包
      implementation 'com.airbnb.android:lottie:4.2.1'
  }
@@ -26,7 +26,7 @@
 
  ## Change Log
  
-  0.1.0:
+  0.1.1:
 
  * 新增LinearLayoutManager -> vertical 分割线
 

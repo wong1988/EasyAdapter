@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import io.github.wong1988.adapter.BaseListAdapter;
 
+
 /**
  * LayoutManager-Vertical 分割线
  */
@@ -70,21 +71,48 @@ public class ItemVerticalDivider extends RecyclerView.ItemDecoration {
 
         RecyclerView.Adapter adapter = parent.getAdapter();
 
+        // 总共绘制数量
+        int childCount = parent.getChildCount();
+
+        // 获取第一个绘制的真实position
+        int itemPosition = -1;
+
+        if (childCount > 0)
+            itemPosition = parent.getChildAdapterPosition(parent.getChildAt(0));
+        else
+            return;
+
         if (adapter instanceof BaseListAdapter) {
             // 头布局
             int headerLayoutCount = ((BaseListAdapter) adapter).isCanvasHeader() ? 1 : 0;
             // 真实数据源长度
             int attachDataSize = ((BaseListAdapter) adapter).getAttachDataSize();
 
-            for (int i = headerLayoutCount + 1; i < attachDataSize + headerLayoutCount; i++) {
+            int start = 0;
+
+            if (itemPosition < headerLayoutCount + 1)
+                start = headerLayoutCount + 1 - itemPosition;
+
+            int end = childCount;
+
+            if (itemPosition + childCount > attachDataSize + headerLayoutCount)
+                end = childCount - ((itemPosition + childCount) - (attachDataSize + headerLayoutCount));
+
+            for (int i = start; i < end; i++) {
                 View child = parent.getChildAt(i);
                 // 绘制顶部的分割线
                 drawTop(c, child);
             }
 
         } else {
-            int childCount = parent.getChildCount();
-            for (int i = 1; i < childCount; i++) {
+
+            int start = 0;
+
+            if (itemPosition == 0)
+                // 如果当前绘制的是第一个item，则不画分割线
+                start = 1;
+
+            for (int i = start; i < childCount; i++) {
                 View child = parent.getChildAt(i);
                 drawTop(c, child);
             }
