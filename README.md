@@ -26,7 +26,7 @@
 
  ## Change Log
  
-  0.1.1:
+  1.0.1:
 
  * 新增LinearLayoutManager -> vertical 分割线
 
