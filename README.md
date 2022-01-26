@@ -29,6 +29,7 @@
   1.0.1:
 
  * 新增LinearLayoutManager -> vertical 分割线
+ * 新增LinearLayoutManager -> Horizontal 分割线
 
   0.0.9:
 
