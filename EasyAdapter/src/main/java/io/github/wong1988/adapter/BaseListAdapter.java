@@ -383,13 +383,13 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerVi
 
         if (mHeaderLayout == null) {
             mHeaderLayout = new LinearLayout(header.getContext());
-            if (orientation == LinearLayout.VERTICAL) {
-                mHeaderLayout.setOrientation(LinearLayout.VERTICAL);
-                mHeaderLayout.setLayoutParams(new ViewGroup.LayoutParams(MATCH_PARENT, WRAP_CONTENT));
-            } else {
-                mHeaderLayout.setOrientation(LinearLayout.HORIZONTAL);
-                mHeaderLayout.setLayoutParams(new ViewGroup.LayoutParams(WRAP_CONTENT, MATCH_PARENT));
-            }
+        }
+
+        if (orientation == LinearLayout.VERTICAL) {
+            mHeaderLayout.setLayoutParams(new ViewGroup.LayoutParams(MATCH_PARENT, WRAP_CONTENT));
+        } else {
+            mHeaderLayout.setOrientation(LinearLayout.HORIZONTAL);
+            mHeaderLayout.setLayoutParams(new ViewGroup.LayoutParams(WRAP_CONTENT, MATCH_PARENT));
         }
 
         final int childCount = mHeaderLayout.getChildCount();
@@ -472,14 +472,16 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerVi
 
         if (mFooterLayout == null) {
             mFooterLayout = new LinearLayout(footer.getContext());
-            if (orientation == LinearLayout.VERTICAL) {
-                mFooterLayout.setOrientation(LinearLayout.VERTICAL);
-                mFooterLayout.setLayoutParams(new ViewGroup.LayoutParams(MATCH_PARENT, WRAP_CONTENT));
-            } else {
-                mFooterLayout.setOrientation(LinearLayout.HORIZONTAL);
-                mFooterLayout.setLayoutParams(new ViewGroup.LayoutParams(WRAP_CONTENT, MATCH_PARENT));
-            }
         }
+
+        if (orientation == LinearLayout.VERTICAL) {
+            mFooterLayout.setOrientation(LinearLayout.VERTICAL);
+            mFooterLayout.setLayoutParams(new ViewGroup.LayoutParams(MATCH_PARENT, WRAP_CONTENT));
+        } else {
+            mFooterLayout.setOrientation(LinearLayout.HORIZONTAL);
+            mFooterLayout.setLayoutParams(new ViewGroup.LayoutParams(WRAP_CONTENT, MATCH_PARENT));
+        }
+
         final int childCount = mFooterLayout.getChildCount();
 
         if (index < 0 || index > childCount) {
