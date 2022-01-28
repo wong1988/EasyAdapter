@@ -14,7 +14,7 @@
  Step 2. Add the dependency
  ```
  dependencies {
-     implementation 'com.github.wong1988:EasyAdapter:1.0.1'
+     implementation 'com.github.wong1988:EasyAdapter:[![](https://jitpack.io/v/wong1988/EasyAdapter.svg)](https://jitpack.io/#wong1988/EasyAdapter)'
      // 动画插件包
      implementation 'com.airbnb.android:lottie:4.2.1'
  }
@@ -27,7 +27,7 @@
 
  ## Change Log
  
-  1.0.2:
+  1.0.3:
 
  * 新增LinearLayoutManager -> vertical 分割线
  * 新增LinearLayoutManager -> Horizontal 分割线
