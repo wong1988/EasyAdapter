@@ -9,6 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.EasyAdapter">
+        <activity
+            android:name=".LinearHorizontalActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LinearVerticalActivity"
+            android:exported="false" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
