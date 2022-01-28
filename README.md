@@ -26,10 +26,11 @@
 
  ## Change Log
  
-  1.0.1:
+  1.0.2:
 
  * 新增LinearLayoutManager -> vertical 分割线
  * 新增LinearLayoutManager -> Horizontal 分割线
+ * 优化头脚布局摆放方向以最后设置的方向为最终效果
 
   0.0.9:
 
