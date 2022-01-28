@@ -14,7 +14,7 @@
  Step 2. Add the dependency
  ```
  dependencies {
-     implementation 'com.github.wong1988:EasyAdapter:[![](https://jitpack.io/v/wong1988/EasyAdapter.svg)](https://jitpack.io/#wong1988/EasyAdapter)'
+     implementation 'com.github.wong1988:EasyAdapter:1.0.3'
      // 动画插件包
      implementation 'com.airbnb.android:lottie:4.2.1'
  }
