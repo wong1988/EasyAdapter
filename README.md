@@ -22,6 +22,7 @@
 
 
  ### BaseAdapter(RecyclerView适配器) | [查看使用方式](https://github.com/wong1988/EasyAdapter/blob/main/RecyclerViewAdapter-README.md)
+ ### LinearLayoutManagerDivider(RecyclerView分割线) | [查看使用方式](https://github.com/wong1988/EasyAdapter/blob/main/LinearLayoutManager-README.md)
 
 
  ## Change Log
