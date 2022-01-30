@@ -18,4 +18,10 @@
         android:onClick="linearManager_horizontal"
         android:text="LinearManager-horizontal" />
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="gridManager_horizontal"
+        android:text="GridManager-vertical" />
+
 </LinearLayout>

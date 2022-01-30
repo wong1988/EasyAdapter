@@ -21,4 +21,8 @@ public class MainActivity extends AppCompatActivity {
     public void linearManager_horizontal(View view) {
         startActivity(new Intent(this, LinearHorizontalActivity.class));
     }
+
+    public void gridManager_horizontal(View view) {
+        startActivity(new Intent(this, GridVerticalActivity.class));
+    }
 }
