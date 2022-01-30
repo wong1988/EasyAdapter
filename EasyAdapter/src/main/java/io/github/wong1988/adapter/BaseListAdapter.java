@@ -385,12 +385,12 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerVi
             mHeaderLayout = new LinearLayout(header.getContext());
         }
 
-        if (orientation == LinearLayout.VERTICAL) {
+        if (orientation == LinearLayout.VERTICAL)
             mHeaderLayout.setLayoutParams(new ViewGroup.LayoutParams(MATCH_PARENT, WRAP_CONTENT));
-        } else {
-            mHeaderLayout.setOrientation(LinearLayout.HORIZONTAL);
+        else
             mHeaderLayout.setLayoutParams(new ViewGroup.LayoutParams(WRAP_CONTENT, MATCH_PARENT));
-        }
+
+        mHeaderLayout.setOrientation(orientation);
 
         final int childCount = mHeaderLayout.getChildCount();
         int mIndex = index;
@@ -474,13 +474,12 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerVi
             mFooterLayout = new LinearLayout(footer.getContext());
         }
 
-        if (orientation == LinearLayout.VERTICAL) {
-            mFooterLayout.setOrientation(LinearLayout.VERTICAL);
+        if (orientation == LinearLayout.VERTICAL)
             mFooterLayout.setLayoutParams(new ViewGroup.LayoutParams(MATCH_PARENT, WRAP_CONTENT));
-        } else {
-            mFooterLayout.setOrientation(LinearLayout.HORIZONTAL);
+        else
             mFooterLayout.setLayoutParams(new ViewGroup.LayoutParams(WRAP_CONTENT, MATCH_PARENT));
-        }
+
+        mFooterLayout.setOrientation(orientation);
 
         final int childCount = mFooterLayout.getChildCount();
 
