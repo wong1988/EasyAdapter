@@ -176,11 +176,23 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerVi
             ViewParent headerLayoutVp = mHeaderLayout.getParent();
             if (headerLayoutVp instanceof ViewGroup)
                 ((ViewGroup) headerLayoutVp).removeView(mHeaderLayout);
+            RecyclerView.LayoutManager manager = mRecyclerView.getLayoutManager();
+            if (manager instanceof GridLayoutManager) {
+                if (mHeaderLayout.getOrientation() == LinearLayout.HORIZONTAL && ((GridLayoutManager) manager).getOrientation() == RecyclerView.VERTICAL) {
+                    mHeaderLayout.setLayoutParams(new ViewGroup.LayoutParams(MATCH_PARENT, WRAP_CONTENT));
+                }
+            }
             return new HeaderViewHolder(mHeaderLayout);
         } else if (viewType == TYPE_FOOTER) {
             ViewParent footerLayoutVp = mFooterLayout.getParent();
             if (footerLayoutVp instanceof ViewGroup)
                 ((ViewGroup) footerLayoutVp).removeView(mFooterLayout);
+            RecyclerView.LayoutManager manager = mRecyclerView.getLayoutManager();
+            if (manager instanceof GridLayoutManager) {
+                if (mFooterLayout.getOrientation() == LinearLayout.HORIZONTAL && ((GridLayoutManager) manager).getOrientation() == RecyclerView.VERTICAL) {
+                    mFooterLayout.setLayoutParams(new ViewGroup.LayoutParams(MATCH_PARENT, WRAP_CONTENT));
+                }
+            }
             return new FooterViewHolder(mFooterLayout);
         } else {
             // 用户自定义的Holder
