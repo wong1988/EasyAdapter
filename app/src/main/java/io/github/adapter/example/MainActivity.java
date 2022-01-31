@@ -27,6 +27,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void gridManager_horizontal(View view) {
-
+        startActivity(new Intent(this, GridHorizontalActivity.class));
     }
 }
