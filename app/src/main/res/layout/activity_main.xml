@@ -21,7 +21,13 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="gridManager_horizontal"
+        android:onClick="gridManager_vertical"
         android:text="GridManager-vertical" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="gridManager_horizontal"
+        android:text="GridManager-horizontal" />
 
 </LinearLayout>
