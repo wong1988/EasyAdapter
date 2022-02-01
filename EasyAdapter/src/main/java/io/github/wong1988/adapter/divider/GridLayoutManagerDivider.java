@@ -174,8 +174,6 @@ public class GridLayoutManagerDivider {
             int spanIndex = spanSizeLookup.getSpanIndex(itemPosition, spanCount);
             // 当前position所在行的index
             int rowIndex = spanSizeLookup.getSpanGroupIndex(itemPosition, spanCount);
-            // 当前position所在列的index
-            int columnIndex = spanIndex / spanSize;
 
             if (adapter instanceof BaseListAdapter) {
                 // 头布局
@@ -189,16 +187,33 @@ public class GridLayoutManagerDivider {
                 if (itemPosition >= headerLayoutCount) {
                     if (spanSize != spanCount) {
                         // 绘制左右分偏移
-                        outRect.left = columnIndex * mDividerHeight / spanCount;
-                        outRect.right = mDividerHeight - (columnIndex + 1) * mDividerHeight / spanCount;
+                        // 其实这里就是个找规律
+                        /**
+                         * 示例：线宽20 一行4个
+                         * spanSize都为1的时候
+                         * 第一行：0、15,5、10,10、5,15,0（四个item的左右偏移量）
+                         * 简单来说最左侧的item的左边的偏移量0，最右侧的item的右边的偏移量为0（整行来说）
+                         * 然后相邻的item，左右侧偏移量相加为线宽 15+5、10+10、5+15
+                         * 如果spanSize 为 1、2、1的情况
+                         * 第二行：0、15,5、5,15、0
+                         * 同样一行的最左侧偏移量0，最右侧偏移量0，相邻item偏移量相加为线宽 15+5、5+15
+                         * 可以得到一个规律：线宽/设置的一行几个 = 5（当前设定的变量下）
+                         * 左侧的偏移量可以用当前item在本行的position得到左侧的偏移量
+                         * 第一行：0*5、1*5、2*5、3*5 第二行：0*5、1*5、3(此值会自动加入合并的item的数量)*5
+                         * 右侧的偏移量可以用 行中的index以及当前item占用的数量来得到右侧的偏移量
+                         * 第一行：20 - (0+1)*5、20 - (1+1)*5、20 - (2+1)*5、20 - (3+1)*5
+                         * 第二行：20 - (0+1)*5、20 - (1+2)*5、20 - (3+1)*5
+                         */
+                        outRect.left = spanIndex * mDividerHeight / spanCount;
+                        outRect.right = mDividerHeight - (spanIndex + spanSize) * mDividerHeight / spanCount;
                     }
                 }
 
             } else {
                 if (spanSize != spanCount) {
-                    // 绘制左右便宜
-                    outRect.left = columnIndex * mDividerHeight / spanCount;
-                    outRect.right = mDividerHeight - (columnIndex + 1) * mDividerHeight / spanCount;
+                    // 绘制左右偏移
+                    outRect.left = spanIndex * mDividerHeight / spanCount;
+                    outRect.right = mDividerHeight - (spanIndex + spanSize) * mDividerHeight / spanCount;
                 }
 
                 if (rowIndex != 0)
