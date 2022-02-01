@@ -675,16 +675,23 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerVi
 
                     int type = getItemViewType(position);
 
-                    //  头脚布局 占满一行
+                    //  头脚、状态布局 占满一行
                     if (type == TYPE_HEADER || type == TYPE_FOOTER || type == TYPE_LOAD_STATE_FOOTER) {
                         return gridManager.getSpanCount();
                     }
 
                     // 其他占据本身1个位置
-                    return 1;
+                    return BaseListAdapter.this.getSpanSize(getRealPosition(position));
                 }
             });
         }
+    }
+
+    /**
+     * 请不在在LayoutManger里进行设置，重写此方法进行设置
+     */
+    public int getSpanSize(int position) {
+        return 1;
     }
 
     private int findMaxByStaggeredGrid(int[] lastPositions) {
