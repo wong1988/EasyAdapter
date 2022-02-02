@@ -51,6 +51,7 @@ public class LinearVerticalAdapter extends SimpleListAdapter<String> {
     }
 
     @Override
+    // 此方法LinearLayoutManger下不生效
     public int getSpanSize(int position) {
         return position == 3 ? 2 : 1;
     }

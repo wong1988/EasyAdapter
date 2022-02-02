@@ -29,7 +29,6 @@ public class LinearHorizontalAdapter extends SimpleListAdapter<String> {
                 "我是第7条数据",
                 "我是第8条数据",
                 "我是第9条数据",
-                "我是第10条数据",
                 "我是第n条数据"
         );
     }
@@ -52,4 +51,9 @@ public class LinearHorizontalAdapter extends SimpleListAdapter<String> {
         holder.getTextView(R.id.tv).setText(s);
     }
 
+    @Override
+    // 此方法LinearLayoutManger下不生效
+    public int getSpanSize(int position) {
+        return position == 6 ? 2 : 1;
+    }
 }

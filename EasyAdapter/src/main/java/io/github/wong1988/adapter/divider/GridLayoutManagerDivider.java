@@ -31,6 +31,21 @@ public class GridLayoutManagerDivider {
     }
 
     /**
+     * 分割线颜色默认透明，宽度1px
+     */
+    public static RecyclerView.ItemDecoration getHorizontalDivider() {
+        return new ItemGridHorizontalDivider();
+    }
+
+    /**
+     * @param color     the divider color.
+     * @param divHeight the divider height.
+     */
+    public static RecyclerView.ItemDecoration getHorizontalDivider(@ColorInt int color, int divHeight) {
+        return new ItemGridHorizontalDivider(color, divHeight);
+    }
+
+    /**
      * GridManager-Vertical 分割线
      */
     private static class ItemGridVerticalDivider extends RecyclerView.ItemDecoration {
@@ -271,6 +286,232 @@ public class GridLayoutManagerDivider {
             int bottom = mChild.getBottom() + mChildLayoutParams.bottomMargin;
             int top = mChild.getTop() - mChildLayoutParams.topMargin;
             c.drawRect(left, top, right, bottom, mPaint);
+        }
+
+    }
+
+    /**
+     * GridManager-Horizontal 分割线
+     */
+    private static class ItemGridHorizontalDivider extends RecyclerView.ItemDecoration {
+
+        // 线高度
+        private final int mDividerHeight;
+        private final Paint mPaint;
+
+        /**
+         * 构造方法，分割线颜色默认透明，宽度1px
+         */
+        public ItemGridHorizontalDivider() {
+            this(Color.parseColor("#00000000"), 1);
+        }
+
+        /**
+         * 构造方法
+         *
+         * @param color     the divider color.
+         * @param divHeight the divider height.
+         */
+        public ItemGridHorizontalDivider(@ColorInt int color, int divHeight) {
+            mDividerHeight = divHeight;
+            mPaint = new Paint();
+            mPaint.setAntiAlias(true);
+            mPaint.setColor(color);
+            mPaint.setStyle(Paint.Style.FILL);
+        }
+
+        @Override
+        public final void onDraw(@NonNull Canvas c, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
+
+            RecyclerView.Adapter adapter = parent.getAdapter();
+
+            // 总共绘制数量
+            int childCount = parent.getChildCount();
+
+            // 获取第一个绘制的真实position
+            int itemPosition;
+
+            if (childCount > 0)
+                itemPosition = parent.getChildAdapterPosition(parent.getChildAt(0));
+            else
+                return;
+
+            if (adapter instanceof BaseListAdapter) {
+                // 头布局
+                int headerLayoutCount = ((BaseListAdapter) adapter).isCanvasHeader() ? 1 : 0;
+                // 真实数据源长度
+                int attachDataSize = ((BaseListAdapter) adapter).getAttachDataSize();
+
+                int start = 0;
+
+                if (itemPosition < headerLayoutCount)
+                    start = headerLayoutCount - itemPosition;
+
+                int end = childCount;
+
+                if (itemPosition + childCount > attachDataSize + headerLayoutCount)
+                    end = childCount - ((itemPosition + childCount) - (attachDataSize + headerLayoutCount));
+
+                for (int i = start; i < end; i++) {
+                    View child = parent.getChildAt(i);
+                    // 绘制顶部的分割线
+                    drawLeft(c, child, parent);
+                    drawBottom(c, child, parent);
+                }
+
+            } else {
+                for (int i = 0; i < childCount; i++) {
+                    View child = parent.getChildAt(i);
+                    drawLeft(c, child, parent);
+                    drawBottom(c, child, parent);
+                }
+            }
+        }
+
+        /**
+         * 是否可以画左侧
+         */
+        private boolean isDrawLeft(@NonNull RecyclerView parent, @NonNull View view) {
+
+            RecyclerView.Adapter adapter = parent.getAdapter();
+            if (!(adapter instanceof BaseListAdapter))
+                return true;
+
+            // 获取布局管理器
+            RecyclerView.LayoutManager layoutManager = parent.getLayoutManager();
+            GridLayoutManager gridLayoutManager = (GridLayoutManager) layoutManager;
+            GridLayoutManager.SpanSizeLookup spanSizeLookup = gridLayoutManager.getSpanSizeLookup();
+            // 获取当前的position
+            int itemPosition = parent.getChildAdapterPosition(view);
+            // 获取设置的每列的item个数
+            int spanCount = gridLayoutManager.getSpanCount();
+            // 当前position所在列的index
+            int columnIndex = spanSizeLookup.getSpanGroupIndex(itemPosition, spanCount);
+
+            int headerLayoutCount = ((BaseListAdapter) adapter).isCanvasHeader() ? 1 : 0;
+            int attachDataSize = ((BaseListAdapter) adapter).getAttachDataSize();
+
+            return columnIndex > headerLayoutCount && itemPosition < attachDataSize + headerLayoutCount;
+        }
+
+        /**
+         * 是否可以画底部的线，最底部的item是不允许画线的
+         */
+        private boolean isDrawBottom(@NonNull RecyclerView parent, @NonNull View view) {
+
+            // 获取布局管理器
+            RecyclerView.LayoutManager layoutManager = parent.getLayoutManager();
+            GridLayoutManager gridLayoutManager = (GridLayoutManager) layoutManager;
+            GridLayoutManager.SpanSizeLookup spanSizeLookup = gridLayoutManager.getSpanSizeLookup();
+            // 获取当前的position
+            int itemPosition = parent.getChildAdapterPosition(view);
+            // 获取设置的每列的item个数
+            int spanCount = gridLayoutManager.getSpanCount();
+            // 当前position的spanSize
+            int spanSize = spanSizeLookup.getSpanSize(itemPosition);
+            int spanIndex = spanSizeLookup.getSpanIndex(itemPosition, spanCount);
+            return spanSize + spanIndex < spanCount;
+        }
+
+        /**
+         * 绘制左边分割线
+         *
+         * @param c      绘制容器
+         * @param mChild 对应ItemView
+         */
+        private void drawLeft(Canvas c, View mChild, RecyclerView recyclerView) {
+
+            if (!isDrawLeft(recyclerView, mChild))
+                return;
+
+            // 获取recyclerview的高度
+            int height = recyclerView.getHeight();
+            int paddingBottom = recyclerView.getPaddingBottom();
+
+            int maxBottom = recyclerView.getHeight() - recyclerView.getPaddingBottom();
+            RecyclerView.LayoutParams mChildLayoutParams = (RecyclerView.LayoutParams) mChild.getLayoutParams();
+            int left = mChild.getLeft() - mDividerHeight - mChildLayoutParams.leftMargin;
+            int top = mChild.getTop() - mChildLayoutParams.topMargin;
+            int right = mChild.getLeft() - mChildLayoutParams.leftMargin;
+            int bottom = mChild.getBottom() + mChildLayoutParams.bottomMargin;
+            if (bottom < height - paddingBottom)
+                // 防止如果最后一列的item未能全部填充会导致顶部分割线不全的情况
+                bottom = height - paddingBottom;
+            c.drawRect(left, top, right, bottom, mPaint);
+        }
+
+        /**
+         * 绘制底部分割线
+         *
+         * @param c      绘制容器
+         * @param mChild 对应ItemView
+         */
+        private void drawBottom(Canvas c, View mChild, RecyclerView recyclerView) {
+
+            if (!isDrawBottom(recyclerView, mChild))
+                return;
+
+            RecyclerView.LayoutParams mChildLayoutParams = (RecyclerView.LayoutParams) mChild.getLayoutParams();
+            int left = mChild.getLeft() - mChildLayoutParams.leftMargin;
+            int top = mChild.getBottom() + mChildLayoutParams.bottomMargin;
+            int bottom = top + mDividerHeight;
+            int right = mChild.getRight() + mChildLayoutParams.rightMargin;
+
+            c.drawRect(left, top, right, bottom, mPaint);
+        }
+
+        @Override
+        public final void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
+
+            RecyclerView.Adapter adapter = parent.getAdapter();
+
+            // 获取当前的position
+            int itemPosition = parent.getChildAdapterPosition(view);
+
+            // 获取布局管理器
+            RecyclerView.LayoutManager layoutManager = parent.getLayoutManager();
+            GridLayoutManager gridLayoutManager = (GridLayoutManager) layoutManager;
+            GridLayoutManager.SpanSizeLookup spanSizeLookup = gridLayoutManager.getSpanSizeLookup();
+            // 获取设置的每列的item个数
+            int spanCount = gridLayoutManager.getSpanCount();
+            // 当前position的spanSize
+            int spanSize = spanSizeLookup.getSpanSize(itemPosition);
+            // 当前position在列中的位置 == 0 表示此列的最顶端
+            // eg. 当前每列3个，position = 0 占2个，position = 1 占1个，position... 占1个
+            // 则position = 0 的 spanIndex 为 0，position = 1 的 spanIndex 为 2，
+            // position = 2 的 spanIndex 为 0，position = 3 的 spanIndex 为 1，position = 4 的 spanIndex 为 2
+            int spanIndex = spanSizeLookup.getSpanIndex(itemPosition, spanCount);
+            // 当前position所在列的index
+            int columnIndex = spanSizeLookup.getSpanGroupIndex(itemPosition, spanCount);
+
+            if (adapter instanceof BaseListAdapter) {
+                // 头布局
+                int headerLayoutCount = ((BaseListAdapter) adapter).isCanvasHeader() ? 1 : 0;
+                // 真实数据源长度
+                int attachDataSize = ((BaseListAdapter) adapter).getAttachDataSize();
+                // 每个Item左侧加一个线高（实际数据源第2列Item开始，且到真实数据源的最后一个Item）
+                if (columnIndex > headerLayoutCount && itemPosition < attachDataSize + headerLayoutCount)
+                    outRect.left = mDividerHeight;
+
+                if (itemPosition >= headerLayoutCount) {
+                    if (spanSize != spanCount) {
+                        // 绘制上下偏移
+                        outRect.top = spanIndex * mDividerHeight / spanCount;
+                        outRect.bottom = mDividerHeight - (spanIndex + spanSize) * mDividerHeight / spanCount;
+                    }
+                }
+
+            } else {
+                if (spanSize != spanCount) {
+                    // 绘制上下偏移
+                    outRect.top = spanIndex * mDividerHeight / spanCount;
+                    outRect.bottom = mDividerHeight - (spanIndex + spanSize) * mDividerHeight / spanCount;
+                }
+
+                if (columnIndex != 0)
+                    // 只要不是第一列item左侧就加线高
+                    outRect.left = mDividerHeight;
+            }
         }
 
     }

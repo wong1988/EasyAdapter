@@ -14,7 +14,7 @@
  Step 2. Add the dependency
  ```
  dependencies {
-     implementation 'com.github.wong1988:EasyAdapter:1.0.6'
+     implementation 'com.github.wong1988:EasyAdapter:1.0.7'
      // 动画插件包
      implementation 'com.airbnb.android:lottie:4.2.1'
  }
@@ -28,9 +28,10 @@
 
  ## Change Log
  
-  1.0.6:
+  1.0.7:
 
  * 新增GridLayoutManager -> vertical 分割线
+ * 新增GridLayoutManager -> Horizontal 分割线
  * 优化头脚布局为GridLayoutManager时的效果
 
   1.0.4:

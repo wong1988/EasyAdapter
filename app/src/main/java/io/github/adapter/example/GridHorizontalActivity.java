@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import io.github.adapter.example.adapter.LinearHorizontalAdapter;
 import io.github.wong1988.adapter.attr.LoadState;
+import io.github.wong1988.adapter.divider.GridLayoutManagerDivider;
 
 public class GridHorizontalActivity extends AppCompatActivity {
 
@@ -23,7 +24,7 @@ public class GridHorizontalActivity extends AppCompatActivity {
         rv.setLayoutManager(linearLayoutManager);
 
 
-        rv.addItemDecoration(new ItemGridHorizontalDivider(Color.parseColor("#000000"), 20));
+        rv.addItemDecoration(GridLayoutManagerDivider.getHorizontalDivider(Color.parseColor("#000000"), 20));
 
         LinearHorizontalAdapter adapter = new LinearHorizontalAdapter(this);
         rv.setAdapter(adapter);
