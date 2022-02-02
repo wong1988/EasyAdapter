@@ -180,7 +180,7 @@ public class GridLayoutManagerDivider {
                 int headerLayoutCount = ((BaseListAdapter) adapter).isCanvasHeader() ? 1 : 0;
                 // 真实数据源长度
                 int attachDataSize = ((BaseListAdapter) adapter).getAttachDataSize();
-                // 每个Item上面加一个线高（实际数据源第一个Item开始，且到真实数据源的最后一个Item）
+                // 每个Item上面加一个线高（实际数据源第2行Item开始，且到真实数据源的最后一个Item）
                 if (rowIndex > headerLayoutCount && itemPosition < attachDataSize + headerLayoutCount)
                     outRect.top = mDividerHeight;
 
