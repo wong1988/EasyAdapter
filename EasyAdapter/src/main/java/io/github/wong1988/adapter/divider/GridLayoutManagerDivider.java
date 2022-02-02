@@ -186,7 +186,7 @@ public class GridLayoutManagerDivider {
 
                 if (itemPosition >= headerLayoutCount) {
                     if (spanSize != spanCount) {
-                        // 绘制左右分偏移
+                        // 绘制左右偏移
                         // 其实这里就是个找规律
                         /**
                          * 示例：线宽20 一行4个
