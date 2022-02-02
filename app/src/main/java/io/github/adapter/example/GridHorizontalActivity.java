@@ -1,5 +1,6 @@
 package io.github.adapter.example;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,10 +18,12 @@ public class GridHorizontalActivity extends AppCompatActivity {
         setContentView(R.layout.activity_grid_horizontal);
 
         RecyclerView rv = findViewById(R.id.rv);
-        GridLayoutManager linearLayoutManager = new GridLayoutManager(this, 3);
+        GridLayoutManager linearLayoutManager = new GridLayoutManager(this, 4);
         linearLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
         rv.setLayoutManager(linearLayoutManager);
 
+
+        rv.addItemDecoration(new ItemGridHorizontalDivider(Color.parseColor("#000000"), 20));
 
         LinearHorizontalAdapter adapter = new LinearHorizontalAdapter(this);
         rv.setAdapter(adapter);
