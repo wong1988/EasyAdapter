@@ -14,7 +14,7 @@
  Step 2. Add the dependency
  ```
  dependencies {
-     implementation 'com.github.wong1988:EasyAdapter:1.0.8'
+     implementation 'com.github.wong1988:EasyAdapter:1.0.9'
      // 动画插件包
      implementation 'com.airbnb.android:lottie:4.2.1'
  }
@@ -28,7 +28,7 @@
 
  ## Change Log
  
-  1.0.8:
+  1.0.9:
 
  * 优化spanSize方法，并修复返回的position错误的bug
 

@@ -693,7 +693,7 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerVi
                     }
 
                     // 其他占据本身1个位置
-                    int realPosition = getRealPosition(position);
+                    int realPosition = position - getHeaderLayoutCount();
                     return BaseListAdapter.this.getSpanSize(getAttachData(realPosition), realPosition);
                 }
             });
@@ -999,8 +999,9 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerVi
         notifyItemRangeChanged(getHeaderLayoutCount() + mData.size() + getFooterLayoutCount(), 1);
     }
 
+
     public final int getRealPosition(int position) {
-        return position - getHeaderLayoutCount();
+        return position + getHeaderLayoutCount();
     }
 
     private static class HeaderViewHolder extends RecyclerViewHolder {
