@@ -694,7 +694,7 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerVi
     }
 
     /**
-     * 请不在在LayoutManger里进行设置，重写此方法进行设置
+     * 请不要在LayoutManger里进行设置，重写此方法进行设置
      */
     public int getSpanSize(int position) {
         return 1;
