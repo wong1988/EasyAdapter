@@ -50,9 +50,9 @@ public class LinearVerticalAdapter extends SimpleListAdapter<String> {
         holder.getTextView(R.id.tv).setText(s);
     }
 
-    @Override
     // 此方法LinearLayoutManger下不生效
-    public int getSpanSize(int position) {
+    @Override
+    public int getSpanSize(String s, int position) {
         return position == 3 ? 2 : 1;
     }
 }

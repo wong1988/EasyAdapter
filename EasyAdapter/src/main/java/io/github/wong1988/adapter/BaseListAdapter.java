@@ -153,7 +153,13 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerVi
         // 进行判断显示类型，来创建返回不同的View
         if (viewType == TYPE_LOAD_STATE_FOOTER) {
             RecyclerView.LayoutManager manager = mRecyclerView.getLayoutManager();
-            if (manager instanceof LinearLayoutManager && ((LinearLayoutManager) manager).getOrientation() == RecyclerView.HORIZONTAL) {
+            int orientation = RecyclerView.VERTICAL;
+            if (manager instanceof LinearLayoutManager) {
+                orientation = ((LinearLayoutManager) manager).getOrientation();
+            } else if (manager instanceof StaggeredGridLayoutManager) {
+                orientation = ((StaggeredGridLayoutManager) manager).getOrientation();
+            }
+            if (orientation == RecyclerView.HORIZONTAL) {
                 // 使用对应的脚布局文件
                 mStateFooterLayout = R.layout.wong_recycle_item_foot_h;
                 wrapParams = new LinearLayout.LayoutParams(WRAP_CONTENT, MATCH_PARENT);
@@ -687,7 +693,8 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerVi
                     }
 
                     // 其他占据本身1个位置
-                    return BaseListAdapter.this.getSpanSize(getRealPosition(position));
+                    int realPosition = getRealPosition(position);
+                    return BaseListAdapter.this.getSpanSize(getAttachData(realPosition), realPosition);
                 }
             });
         }
@@ -696,7 +703,7 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerVi
     /**
      * 请不要在LayoutManger里进行设置，重写此方法进行设置
      */
-    public int getSpanSize(int position) {
+    public int getSpanSize(T t, int position) {
         return 1;
     }
 
@@ -993,7 +1000,7 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerVi
     }
 
     public final int getRealPosition(int position) {
-        return position + getHeaderLayoutCount();
+        return position - getHeaderLayoutCount();
     }
 
     private static class HeaderViewHolder extends RecyclerViewHolder {

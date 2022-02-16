@@ -14,7 +14,7 @@
  Step 2. Add the dependency
  ```
  dependencies {
-     implementation 'com.github.wong1988:EasyAdapter:1.0.7'
+     implementation 'com.github.wong1988:EasyAdapter:1.0.8'
      // 动画插件包
      implementation 'com.airbnb.android:lottie:4.2.1'
  }
@@ -28,6 +28,10 @@
 
  ## Change Log
  
+  1.0.8:
+
+ * 优化spanSize方法，并修复返回的position错误的bug
+
   1.0.7:
 
  * 新增GridLayoutManager -> vertical 分割线
