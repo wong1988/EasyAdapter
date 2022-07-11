@@ -10,24 +10,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="linearManager_vertical"
-        android:text="LinearManager-vertical" />
+        android:text="垂直列表" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="linearManager_horizontal"
-        android:text="LinearManager-horizontal" />
+        android:text="水平列表" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="gridManager_vertical"
-        android:text="GridManager-vertical" />
+        android:text="垂直网格" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="gridManager_horizontal"
-        android:text="GridManager-horizontal" />
+        android:text="水平网格" />
 
 </LinearLayout>
