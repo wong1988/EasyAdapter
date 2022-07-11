@@ -45,7 +45,7 @@ public class ViewPagerLazyAdapter extends FragmentPagerAdapter {
 
         if (mTitles != null && mTitles.size() == mFragments.size())
             pageTitle = mTitles.get(position);
-        
+
         return pageTitle;
     }
 }
