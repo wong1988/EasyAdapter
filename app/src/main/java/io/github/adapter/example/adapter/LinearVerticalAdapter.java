@@ -41,13 +41,13 @@ public class LinearVerticalAdapter extends SimpleListAdapter<String> {
     public void addHeader(Context context) {
         TextView header = new TextView(context);
         header.setBackgroundColor(context.getResources().getColor(android.R.color.holo_red_dark));
-        header.setText("头布局");
+        header.setText("头布局" + System.currentTimeMillis());
         addHeaderView(header);
     }
 
     public void addFooter() {
         TextView footer = new TextView(getAttachContext());
-        footer.setText("脚布局");
+        footer.setText("脚布局" + System.currentTimeMillis());
         footer.setBackgroundColor(getAttachContext().getResources().getColor(android.R.color.holo_red_dark));
         addFooterView(footer);
     }
