@@ -1,6 +1,8 @@
 package io.github.adapter.example.adapter;
 
 import android.content.Context;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.Arrays;
@@ -34,14 +36,19 @@ public class LinearVerticalAdapter extends SimpleListAdapter<String> {
 
     public LinearVerticalAdapter(Context context) {
         super(context, R.layout.item_vertical, false, list);
+    }
 
+    public void addHeader(Context context) {
         TextView header = new TextView(context);
         header.setBackgroundColor(context.getResources().getColor(android.R.color.holo_red_dark));
         header.setText("头布局");
-        TextView footer = new TextView(context);
-        footer.setText("脚布局");
-        footer.setBackgroundColor(context.getResources().getColor(android.R.color.holo_red_dark));
         addHeaderView(header);
+    }
+
+    public void addFooter() {
+        TextView footer = new TextView(getAttachContext());
+        footer.setText("脚布局");
+        footer.setBackgroundColor(getAttachContext().getResources().getColor(android.R.color.holo_red_dark));
         addFooterView(footer);
     }
 
