@@ -28,7 +28,7 @@ public class LinearHorizontalActivity extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
         rv.setLayoutManager(linearLayoutManager);
-        rv.addItemDecoration(LinearLayoutManagerDivider.getVerticalDivider());
+        rv.addItemDecoration(LinearLayoutManagerDivider.getHorizontalDivider());
 
         adapter = new LinearHorizontalAdapter(this);
         rv.setAdapter(adapter);
@@ -44,7 +44,7 @@ public class LinearHorizontalActivity extends AppCompatActivity {
         menu.add(1, 4, 5, "清空脚布局");
         menu.add(1, 5, 6, "删除脚布局1");
         menu.add(1, 6, 6, "20高分割线");
-        menu.add(1, 7, 6, "20高 距左10 距右20 分割线");
+        menu.add(1, 7, 6, "20高 距上10 距下20 分割线");
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -77,11 +77,11 @@ public class LinearHorizontalActivity extends AppCompatActivity {
                 break;
             case 6:
                 adapter.removeAllItemDecoration();
-                rv.addItemDecoration(LinearLayoutManagerDivider.getVerticalDivider(Color.parseColor("#000000"), 20));
+                rv.addItemDecoration(LinearLayoutManagerDivider.getHorizontalDivider(Color.parseColor("#000000"), 20));
                 break;
             case 7:
                 adapter.removeAllItemDecoration();
-                rv.addItemDecoration(LinearLayoutManagerDivider.getVerticalDivider(Color.parseColor("#589654"), 20, 10, 20));
+                rv.addItemDecoration(LinearLayoutManagerDivider.getHorizontalDivider(Color.parseColor("#589654"), 20, 10, 20));
                 break;
         }
         return super.onOptionsItemSelected(item);
