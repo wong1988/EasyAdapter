@@ -502,10 +502,14 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerVi
             mFooterLayout = new LinearLayout(footer.getContext());
         }
 
-        if (orientation == LinearLayout.VERTICAL)
-            mFooterLayout.setLayoutParams(new ViewGroup.LayoutParams(MATCH_PARENT, WRAP_CONTENT));
-        else
-            mFooterLayout.setLayoutParams(new ViewGroup.LayoutParams(WRAP_CONTENT, MATCH_PARENT));
+        ViewGroup.LayoutParams layoutParams = mFooterLayout.getLayoutParams();
+        if (layoutParams == null)
+            layoutParams = new ViewGroup.LayoutParams(0, 0);
+
+        layoutParams.width = orientation == LinearLayout.VERTICAL ? MATCH_PARENT : WRAP_CONTENT;
+        layoutParams.height = orientation == LinearLayout.VERTICAL ? WRAP_CONTENT : MATCH_PARENT;
+
+        mFooterLayout.setLayoutParams(layoutParams);
 
         mFooterLayout.setOrientation(orientation);
 
