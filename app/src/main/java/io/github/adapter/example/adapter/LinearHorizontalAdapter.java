@@ -46,6 +46,20 @@ public class LinearHorizontalAdapter extends SimpleListAdapter<String> {
         addFooterView(footer, RecyclerView.HORIZONTAL);
     }
 
+    public void addHeader() {
+        TextView header = new TextView(getAttachContext());
+        header.setBackgroundColor(getAttachContext().getResources().getColor(android.R.color.holo_red_dark));
+        header.setText("头布局" + System.currentTimeMillis());
+        addHeaderView(header, RecyclerView.HORIZONTAL);
+    }
+
+    public void addFooter() {
+        TextView footer = new TextView(getAttachContext());
+        footer.setText("脚布局" + System.currentTimeMillis());
+        footer.setBackgroundColor(getAttachContext().getResources().getColor(android.R.color.holo_red_dark));
+        addFooterView(footer, RecyclerView.HORIZONTAL);
+    }
+
     @Override
     public void onBindViewHolders(RecyclerViewHolder holder, int viewType, String s, int position) {
         holder.getTextView(R.id.tv).setText(s);
