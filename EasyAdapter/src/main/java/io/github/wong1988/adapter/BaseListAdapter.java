@@ -1007,6 +1007,19 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerVi
         notifyItemRangeChanged(getHeaderLayoutCount() + mData.size() + getFooterLayoutCount(), 1);
     }
 
+    /**
+     * 移除所有分割线
+     */
+    public final void removeAllItemDecoration() {
+        RecyclerView recyclerView = getAttachRecyclerView();
+        if (recyclerView == null)
+            return;
+
+        for (int i = 0; i < recyclerView.getItemDecorationCount(); i++) {
+            recyclerView.removeItemDecorationAt(i);
+            i--;
+        }
+    }
 
     public final int getRealPosition(int position) {
         return position + getHeaderLayoutCount();
