@@ -52,7 +52,7 @@ public class LinearVerticalActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case 0:
-                adapter.addHeader(LinearVerticalActivity.this);
+                adapter.addHeader();
                 rv.scrollToPosition(0);
                 break;
             case 1:
