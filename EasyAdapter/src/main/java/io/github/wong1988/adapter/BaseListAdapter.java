@@ -182,29 +182,11 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerVi
             ViewParent headerLayoutVp = mHeaderLayout.getParent();
             if (headerLayoutVp instanceof ViewGroup)
                 ((ViewGroup) headerLayoutVp).removeView(mHeaderLayout);
-            RecyclerView.LayoutManager manager = mRecyclerView.getLayoutManager();
-            if (manager instanceof GridLayoutManager) {
-                if (mHeaderLayout.getOrientation() == LinearLayout.HORIZONTAL && ((GridLayoutManager) manager).getOrientation() == RecyclerView.VERTICAL) {
-                    mHeaderLayout.setLayoutParams(new ViewGroup.LayoutParams(MATCH_PARENT, WRAP_CONTENT));
-                }
-                if (mHeaderLayout.getOrientation() == LinearLayout.VERTICAL && ((GridLayoutManager) manager).getOrientation() == RecyclerView.HORIZONTAL) {
-                    mHeaderLayout.setLayoutParams(new ViewGroup.LayoutParams(WRAP_CONTENT, MATCH_PARENT));
-                }
-            }
             return new HeaderViewHolder(mHeaderLayout);
         } else if (viewType == TYPE_FOOTER) {
             ViewParent footerLayoutVp = mFooterLayout.getParent();
             if (footerLayoutVp instanceof ViewGroup)
                 ((ViewGroup) footerLayoutVp).removeView(mFooterLayout);
-            RecyclerView.LayoutManager manager = mRecyclerView.getLayoutManager();
-            if (manager instanceof GridLayoutManager) {
-                if (mFooterLayout.getOrientation() == LinearLayout.HORIZONTAL && ((GridLayoutManager) manager).getOrientation() == RecyclerView.VERTICAL) {
-                    mFooterLayout.setLayoutParams(new ViewGroup.LayoutParams(MATCH_PARENT, WRAP_CONTENT));
-                }
-                if (mFooterLayout.getOrientation() == LinearLayout.VERTICAL && ((GridLayoutManager) manager).getOrientation() == RecyclerView.HORIZONTAL) {
-                    mFooterLayout.setLayoutParams(new ViewGroup.LayoutParams(WRAP_CONTENT, MATCH_PARENT));
-                }
-            }
             return new FooterViewHolder(mFooterLayout);
         } else {
             // 用户自定义的Holder
@@ -410,13 +392,10 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerVi
         }
 
         ViewGroup.LayoutParams layoutParams = mHeaderLayout.getLayoutParams();
-        if (layoutParams == null)
-            layoutParams = new ViewGroup.LayoutParams(0, 0);
-
-        layoutParams.width = orientation == LinearLayout.VERTICAL ? MATCH_PARENT : WRAP_CONTENT;
-        layoutParams.height = orientation == LinearLayout.VERTICAL ? WRAP_CONTENT : MATCH_PARENT;
-
-        mHeaderLayout.setLayoutParams(layoutParams);
+        if (layoutParams == null) {
+            layoutParams = new ViewGroup.LayoutParams(WRAP_CONTENT, WRAP_CONTENT);
+            mHeaderLayout.setLayoutParams(layoutParams);
+        }
 
         mHeaderLayout.setOrientation(orientation);
 
@@ -503,13 +482,10 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerVi
         }
 
         ViewGroup.LayoutParams layoutParams = mFooterLayout.getLayoutParams();
-        if (layoutParams == null)
-            layoutParams = new ViewGroup.LayoutParams(0, 0);
-
-        layoutParams.width = orientation == LinearLayout.VERTICAL ? MATCH_PARENT : WRAP_CONTENT;
-        layoutParams.height = orientation == LinearLayout.VERTICAL ? WRAP_CONTENT : MATCH_PARENT;
-
-        mFooterLayout.setLayoutParams(layoutParams);
+        if (layoutParams == null) {
+            layoutParams = new ViewGroup.LayoutParams(WRAP_CONTENT, WRAP_CONTENT);
+            mFooterLayout.setLayoutParams(layoutParams);
+        }
 
         mFooterLayout.setOrientation(orientation);
 
