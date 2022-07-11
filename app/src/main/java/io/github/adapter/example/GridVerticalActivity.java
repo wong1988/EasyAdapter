@@ -8,7 +8,6 @@ import android.view.MenuItem;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import io.github.adapter.example.adapter.LinearVerticalAdapter;
@@ -26,9 +25,9 @@ public class GridVerticalActivity extends AppCompatActivity {
         setContentView(R.layout.activity_grid_vertical);
 
         rv = findViewById(R.id.rv);
-        LinearLayoutManager linearLayoutManager = new GridLayoutManager(this, 3);
-        linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
-        rv.setLayoutManager(linearLayoutManager);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
+        gridLayoutManager.setOrientation(RecyclerView.VERTICAL);
+        rv.setLayoutManager(gridLayoutManager);
         rv.addItemDecoration(GridLayoutManagerDivider.getVerticalDivider());
 
         adapter = new LinearVerticalAdapter(this);
