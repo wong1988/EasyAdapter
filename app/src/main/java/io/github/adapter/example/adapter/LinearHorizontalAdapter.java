@@ -57,7 +57,7 @@ public class LinearHorizontalAdapter extends SimpleListAdapter<String> {
         TextView footer = new TextView(getAttachContext());
         footer.setText("脚布局" + System.currentTimeMillis());
         footer.setBackgroundColor(getAttachContext().getResources().getColor(android.R.color.holo_red_dark));
-        addFooterView(footer, RecyclerView.HORIZONTAL);
+        addFooterView(footer);
     }
 
     @Override
