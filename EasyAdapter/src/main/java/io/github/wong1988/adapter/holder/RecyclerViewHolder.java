@@ -1,9 +1,5 @@
 package io.github.wong1988.adapter.holder;
 
-import static android.view.View.GONE;
-import static android.view.View.INVISIBLE;
-import static android.view.View.VISIBLE;
-
 import android.graphics.drawable.Drawable;
 import android.util.SparseArray;
 import android.view.View;
@@ -29,6 +25,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+
+import static android.view.View.GONE;
+import static android.view.View.INVISIBLE;
+import static android.view.View.VISIBLE;
 
 /**
  * RecyclerView.ViewHolder
