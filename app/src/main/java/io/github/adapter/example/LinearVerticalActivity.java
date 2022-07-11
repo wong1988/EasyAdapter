@@ -76,18 +76,12 @@ public class LinearVerticalActivity extends AppCompatActivity {
                 adapter.removeFooter(0);
                 break;
             case 6:
-                int itemDecorationCount = rv.getItemDecorationCount();
-                for (int i = 0; i < itemDecorationCount; i++) {
-                    rv.removeItemDecorationAt(i);
-                }
+                adapter.removeAllItemDecoration();
                 rv.addItemDecoration(LinearLayoutManagerDivider.getVerticalDivider(Color.parseColor("#000000"), 20));
                 break;
             case 7:
-                int itemDecorationCount2 = rv.getItemDecorationCount();
-                for (int i = 0; i < itemDecorationCount2; i++) {
-                    rv.removeItemDecorationAt(i);
-                }
-                rv.addItemDecoration(LinearLayoutManagerDivider.getVerticalDivider(Color.parseColor("#000000"), 20, 10, 20));
+                adapter.removeAllItemDecoration();
+                rv.addItemDecoration(LinearLayoutManagerDivider.getVerticalDivider(Color.parseColor("#589654"), 20, 10, 20));
                 break;
         }
         return super.onOptionsItemSelected(item);
