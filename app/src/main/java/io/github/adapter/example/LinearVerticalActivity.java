@@ -14,6 +14,8 @@ import io.github.adapter.example.adapter.LinearVerticalAdapter;
 import io.github.wong1988.adapter.attr.LoadState;
 import io.github.wong1988.adapter.divider.LinearLayoutManagerDivider;
 
+import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
+
 public class LinearVerticalActivity extends AppCompatActivity {
 
     private LinearVerticalAdapter adapter;
@@ -43,8 +45,9 @@ public class LinearVerticalActivity extends AppCompatActivity {
         menu.add(1, 3, 4, "删除头布局1");
         menu.add(1, 4, 5, "清空脚布局");
         menu.add(1, 5, 6, "删除脚布局1");
-        menu.add(1, 6, 6, "20高分割线");
-        menu.add(1, 7, 6, "20高 距左10 距右20 分割线");
+        menu.add(1, 6, 7, "20高分割线");
+        menu.add(1, 7, 8, "20高 距左10 距右20 分割线");
+        menu.add(1, 8, 9, "设置头布局的宽高");
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -82,6 +85,9 @@ public class LinearVerticalActivity extends AppCompatActivity {
             case 7:
                 adapter.removeAllItemDecoration();
                 rv.addItemDecoration(LinearLayoutManagerDivider.getVerticalDivider(Color.parseColor("#589654"), 20, 10, 20));
+                break;
+            case 8:
+                adapter.setHeaderLayoutParams(WRAP_CONTENT, WRAP_CONTENT);
                 break;
         }
         return super.onOptionsItemSelected(item);
