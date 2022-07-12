@@ -393,10 +393,13 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerVi
 
         ViewGroup.LayoutParams layoutParams = mHeaderLayout.getLayoutParams();
         if (layoutParams == null) {
-            layoutParams = new ViewGroup.LayoutParams(WRAP_CONTENT, WRAP_CONTENT);
-            mHeaderLayout.setLayoutParams(layoutParams);
+            layoutParams = new ViewGroup.LayoutParams(mHeaderWidth, mHeaderHeight);
+        } else {
+            layoutParams.width = mHeaderWidth;
+            layoutParams.height = mHeaderHeight;
         }
 
+        mHeaderLayout.setLayoutParams(layoutParams);
         mHeaderLayout.setOrientation(orientation);
 
         final int childCount = mHeaderLayout.getChildCount();
@@ -422,6 +425,30 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerVi
         if (childCount == 0 && mHeaderLayout.getChildCount() == 1)
             // 通知适配器刷新第一条数据
             notifyItemInserted(0);
+    }
+
+    // 头布局宽高
+    private int mHeaderWidth = WRAP_CONTENT;
+    private int mHeaderHeight = WRAP_CONTENT;
+
+    /**
+     * 设置头布局的宽高
+     */
+    public final void setHeaderLayoutParams(int width, int height) {
+
+        this.mHeaderWidth = width;
+        this.mHeaderHeight = height;
+
+        if (mHeaderLayout != null) {
+            ViewGroup.LayoutParams layoutParams = mHeaderLayout.getLayoutParams();
+            if (layoutParams == null) {
+                layoutParams = new ViewGroup.LayoutParams(width, height);
+            } else {
+                layoutParams.width = width;
+                layoutParams.height = height;
+            }
+            mHeaderLayout.setLayoutParams(layoutParams);
+        }
     }
 
     /**
@@ -483,10 +510,13 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerVi
 
         ViewGroup.LayoutParams layoutParams = mFooterLayout.getLayoutParams();
         if (layoutParams == null) {
-            layoutParams = new ViewGroup.LayoutParams(WRAP_CONTENT, WRAP_CONTENT);
-            mFooterLayout.setLayoutParams(layoutParams);
+            layoutParams = new ViewGroup.LayoutParams(mFooterWidth, mFooterHeight);
+        } else {
+            layoutParams.width = mFooterWidth;
+            layoutParams.height = mFooterHeight;
         }
 
+        mFooterLayout.setLayoutParams(layoutParams);
         mFooterLayout.setOrientation(orientation);
 
         final int childCount = mFooterLayout.getChildCount();
@@ -513,6 +543,29 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerVi
             notifyItemInserted(getFooterPosition());
     }
 
+    // 头布局宽高
+    private int mFooterWidth = WRAP_CONTENT;
+    private int mFooterHeight = WRAP_CONTENT;
+
+    /**
+     * 设置脚布局的宽高
+     */
+    public final void setFooterLayoutParams(int width, int height) {
+
+        this.mFooterWidth = width;
+        this.mFooterHeight = height;
+
+        if (mFooterLayout != null) {
+            ViewGroup.LayoutParams layoutParams = mFooterLayout.getLayoutParams();
+            if (layoutParams == null) {
+                layoutParams = new ViewGroup.LayoutParams(width, height);
+            } else {
+                layoutParams.width = mFooterWidth;
+                layoutParams.height = mFooterHeight;
+            }
+            mFooterLayout.setLayoutParams(layoutParams);
+        }
+    }
 
     // 获取脚布局的刷新位置
     private int getFooterPosition() {
