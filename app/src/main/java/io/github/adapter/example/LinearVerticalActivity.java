@@ -48,6 +48,7 @@ public class LinearVerticalActivity extends AppCompatActivity {
         menu.add(1, 6, 7, "20高分割线");
         menu.add(1, 7, 8, "20高 距左10 距右20 分割线");
         menu.add(1, 8, 9, "设置头布局的宽高");
+        menu.add(1, 9, 10, "设置脚布局的宽高");
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -88,6 +89,9 @@ public class LinearVerticalActivity extends AppCompatActivity {
                 break;
             case 8:
                 adapter.setHeaderLayoutParams(WRAP_CONTENT, WRAP_CONTENT);
+                break;
+            case 9:
+                adapter.setFooterLayoutParams(WRAP_CONTENT, WRAP_CONTENT);
                 break;
         }
         return super.onOptionsItemSelected(item);
