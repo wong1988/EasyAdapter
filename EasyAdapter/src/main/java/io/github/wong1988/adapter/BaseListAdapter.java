@@ -387,6 +387,11 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerVi
      */
     public final void addHeaderView(View header, final int index, int orientation) {
 
+        if (mHeaderWidth == null || mHeaderHeight == null) {
+            mHeaderWidth = orientation == LinearLayout.VERTICAL ? MATCH_PARENT : WRAP_CONTENT;
+            mHeaderHeight = orientation == LinearLayout.VERTICAL ? WRAP_CONTENT : MATCH_PARENT;
+        }
+
         if (mHeaderLayout == null) {
             mHeaderLayout = new LinearLayout(header.getContext());
         }
@@ -428,8 +433,8 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerVi
     }
 
     // 头布局宽高
-    private int mHeaderWidth = WRAP_CONTENT;
-    private int mHeaderHeight = WRAP_CONTENT;
+    private Integer mHeaderWidth;
+    private Integer mHeaderHeight;
 
     /**
      * 设置头布局的宽高
@@ -504,6 +509,11 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerVi
      */
     public final void addFooterView(View footer, int index, int orientation) {
 
+        if (mFooterWidth == null || mFooterHeight == null) {
+            mFooterWidth = orientation == LinearLayout.VERTICAL ? MATCH_PARENT : WRAP_CONTENT;
+            mFooterHeight = orientation == LinearLayout.VERTICAL ? WRAP_CONTENT : MATCH_PARENT;
+        }
+
         if (mFooterLayout == null) {
             mFooterLayout = new LinearLayout(footer.getContext());
         }
@@ -543,9 +553,9 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerVi
             notifyItemInserted(getFooterPosition());
     }
 
-    // 头布局宽高
-    private int mFooterWidth = WRAP_CONTENT;
-    private int mFooterHeight = WRAP_CONTENT;
+    // 脚布局宽高
+    private Integer mFooterWidth;
+    private Integer mFooterHeight;
 
     /**
      * 设置脚布局的宽高
