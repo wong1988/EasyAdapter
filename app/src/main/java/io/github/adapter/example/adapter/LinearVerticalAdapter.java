@@ -1,6 +1,7 @@
 package io.github.adapter.example.adapter;
 
 import android.content.Context;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.Arrays;
@@ -40,7 +41,7 @@ public class LinearVerticalAdapter extends SimpleListAdapter<String> {
         TextView header = new TextView(getAttachContext());
         header.setBackgroundColor(getAttachContext().getResources().getColor(android.R.color.holo_red_dark));
         header.setText("头布局" + System.currentTimeMillis());
-        addHeaderView(header);
+        addHeaderView(header, LinearLayout.HORIZONTAL);
     }
 
     public void addFooter() {
