@@ -19,9 +19,9 @@ onBindViewHolders(RecyclerViewHolder holder, int viewType, T t, int position);
 ```
 // 添加数据
 addData()
-// 移除指定位置数据
+// 移除指定数据源中的位置数据
 remove(int position)
-// 更新指定位置数据
+// 更新指定数据源中的位置数据
 update(int position, T t)
 // 清空数据源
 clearAll()
@@ -31,6 +31,8 @@ getAttachXXX()
 addHeaderView() addFooterView()
 // 移除头、脚布局
 removeHeader() removeAllHeaders() removeFooter() removeAllFooters()
+// 设置头、脚布局的宽高
+setHeaderLayoutParams() setFooterLayoutParams()
 // 设置加载状态的资源，可以是drawable/mipmap下的图片资源，也可以是raw下的json动画资源
 // 自适应图片大小，最大50dp
 setLoadingRes(int loadingRes)
