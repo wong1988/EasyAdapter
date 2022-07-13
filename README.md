@@ -45,7 +45,6 @@
 
  * 新增GridLayoutManager -> vertical 分割线
  * 新增GridLayoutManager -> Horizontal 分割线
- * 优化头脚布局为GridLayoutManager时的效果
 
   1.0.4:
 
