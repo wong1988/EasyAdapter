@@ -14,7 +14,7 @@
  Step 2. Add the dependency
  ```
  dependencies {
-     implementation 'com.github.wong1988:EasyAdapter:1.1.1'
+     implementation 'com.github.wong1988:EasyAdapter:1.1.2'
      // 动画插件包
      implementation 'com.airbnb.android:lottie:4.2.1'
  }
@@ -27,10 +27,11 @@
 
  ## Change Log
  
-  1.1.1:
+  1.1.2:
 
  * 新增删除所有分割线的方法
  * 修复添加头、脚布局部分情况闪退的问题
+ * 头、脚布局支持自定义宽高
 
   1.1.0:
 
