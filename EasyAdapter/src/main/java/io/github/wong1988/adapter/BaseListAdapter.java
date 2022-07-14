@@ -705,11 +705,6 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerVi
                     mLoadMoreListener.onLoadMore();
                 }
 
-                // 防止第一行到顶部有空白区域
-                if (manager instanceof StaggeredGridLayoutManager) {
-                    ((StaggeredGridLayoutManager) manager).invalidateSpanAssignments();
-                }
-
             }
 
             @Override
