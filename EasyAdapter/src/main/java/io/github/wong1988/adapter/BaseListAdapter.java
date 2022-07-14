@@ -754,6 +754,13 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerVi
         return 1;
     }
 
+    /**
+     * 流式布局 可重写此方法，对item占用进行调整
+     */
+    public void onViewAttachedToWindow2(@NonNull RecyclerViewHolder holder, T t, int position) {
+
+    }
+
     private int findMaxByStaggeredGrid(int[] lastPositions) {
         int max = lastPositions[0];
         for (int value : lastPositions) {
@@ -771,11 +778,14 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerVi
         int type = holder.getItemViewType();
         if (type == TYPE_HEADER || type == TYPE_FOOTER || type == TYPE_LOAD_STATE_FOOTER) {
             ViewGroup.LayoutParams params = holder.itemView.getLayoutParams();
-            if (params instanceof StaggeredGridLayoutManager.LayoutParams
-                    && holder.getLayoutPosition() == mData.size()) {
+            if (params instanceof StaggeredGridLayoutManager.LayoutParams) {
                 StaggeredGridLayoutManager.LayoutParams layoutParams = (StaggeredGridLayoutManager.LayoutParams) params;
                 layoutParams.setFullSpan(true);
             }
+        } else {
+            int position = mRecyclerView.getChildAdapterPosition(holder.itemView);
+            T t = mData.get(position - getHeaderLayoutCount());
+            onViewAttachedToWindow2(holder, t, position - getHeaderLayoutCount());
         }
     }
 
