@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import io.github.adapter.example.adapter.StaggeredVerticalAdapter;
 import io.github.wong1988.adapter.attr.LoadState;
 import io.github.wong1988.adapter.divider.StaggeredGridLayoutManagerDivider;
+import io.github.wong1988.adapter.listener.OnLoadMoreListener;
 
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 
@@ -32,7 +33,14 @@ public class StaggeredGridVerticalActivity extends AppCompatActivity {
 
         adapter = new StaggeredVerticalAdapter(this);
         rv.setAdapter(adapter);
-        adapter.setLoadState(LoadState.LOAD_END);
+        adapter.setLoadState(LoadState.LOAD_COMPLETE);
+
+        adapter.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore() {
+                adapter.appendData();
+            }
+        });
     }
 
     @Override
@@ -46,7 +54,6 @@ public class StaggeredGridVerticalActivity extends AppCompatActivity {
         menu.add(1, 6, 7, "2高分割线");
         menu.add(1, 7, 8, "设置头布局的宽高[MATCH_P..，50]");
         menu.add(1, 8, 9, "设置脚布局的宽高[MATCH_P..，50]");
-        menu.add(1, 9, 10, "追加数据");
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -81,9 +88,6 @@ public class StaggeredGridVerticalActivity extends AppCompatActivity {
                 break;
             case 8:
                 adapter.setFooterLayoutParams(MATCH_PARENT, 50);
-                break;
-            case 9:
-                adapter.appendData();
                 break;
         }
         return super.onOptionsItemSelected(item);

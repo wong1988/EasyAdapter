@@ -71,7 +71,7 @@ public class StaggeredVerticalAdapter extends SimpleListAdapter<StaggeredBean> {
 
 
     public StaggeredVerticalAdapter(Context context) {
-        super(context, R.layout.item, false, list);
+        super(context, R.layout.item, true, list);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.P)
