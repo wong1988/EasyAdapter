@@ -48,7 +48,7 @@ public class LinearHorizontalActivity extends AppCompatActivity {
         menu.add(1, 5, 6, "删除脚布局中的第一个view");
         menu.add(1, 6, 7, "20高分割线");
         menu.add(1, 7, 8, "20高 距上10 距下20 分割线");
-        menu.add(1, 8, 9, "设置头布局的宽高[MATCH_P..，300]");
+        menu.add(1, 8, 9, "设置头布局的宽高[MATCH_P..，30]");
         menu.add(1, 9, 10, "设置脚布局的宽高[WRAP_CONTENT]");
         return super.onCreateOptionsMenu(menu);
     }
@@ -89,7 +89,7 @@ public class LinearHorizontalActivity extends AppCompatActivity {
                 rv.addItemDecoration(LinearLayoutManagerDivider.getHorizontalDivider(Color.parseColor("#589654"), 20, 10, 20));
                 break;
             case 8:
-                adapter.setHeaderLayoutParams(MATCH_PARENT, 300);
+                adapter.setHeaderLayoutParams(MATCH_PARENT, 30);
                 break;
             case 9:
                 adapter.setFooterLayoutParams(WRAP_CONTENT, WRAP_CONTENT);
