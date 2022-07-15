@@ -59,8 +59,8 @@ setLoadState()
 
 监听器
 ```
-1. OnItemClickListener() Item的点击事件
-2. OnItemLongClickListener() Item的长按点击事件
+1. OnItemClickListener() item的点击事件
+2. OnItemLongClickListener() item的长按点击事件
 3. OnLoadMoreListener() 上拉加载的监听事件
 4. OnScrollListener() 列表的滚动监听事件
 5. OnStateFooterClickListener(LoadState state) 加载状态脚布局点击的监听事件
@@ -75,6 +75,6 @@ setLoadState()
 2. setAdapter()前需要先设置LayoutManager，内部会根据LayoutManger进行选择适当的加载状态脚布局【横向、纵向】
 3. 设置LayoutManager时千万不要设置setSpanSizeLookup()，请重写继承的适配器方法getSpanSize()进行设置
 4. 重写onViewAttachedToWindow2()方法，可对瀑布流布局实现类似setSpanSizeLookup()效果
-5. 内部对getItemCount()进行了处理，所以适配器参数返回的position并不一定是真实的position，如果使用notifyItemRangeChanged()，notifyItemInserted()等方法可能达不到预期的效果（notifyDataSetChanged方法不影响）。如果一定要使用，可通过getRealPosition()返回真正的position，再去调用notifyXXX()方法。推荐使用addData()，remove()，update()等方法，方法内部会触发自动刷新适配器。
-6. 添加头布局（默认为垂直方向），头布局宽默认为 match_parent，反之水平方向高度默认为 match_parent(注：默认值在整个适配器生命周期中仅会生效一次)，可调用方法进行更改宽高，脚布局同理
+5. 内部对getItemCount()进行了处理，所以适配器onBindViewHolders()参数返回的position并不一定是真实的position，如果使用notifyItemRangeChanged()，notifyItemInserted()等方法可能达不到预期的效果（notifyDataSetChanged方法不影响）。如果一定要使用，可通过getRealPosition()返回真正的position，再去调用notifyXXX()方法。推荐使用addData()，remove()，update()等方法，方法内部会触发自动刷新适配器。
+6. 添加头布局（默认为垂直方向），头布局宽默认为 match_parent，反之水平方向高度默认为 match_parent(注：默认值在整个适配器生命周期中仅第一次生效)，可调用方法进行更改宽高，脚布局同理
 7. 头脚布局以最后一次设置的方向为最终效果
