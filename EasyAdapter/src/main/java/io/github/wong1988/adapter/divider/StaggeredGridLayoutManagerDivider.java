@@ -33,20 +33,19 @@ public class StaggeredGridLayoutManagerDivider {
     /**
      * 分割线颜色默认透明，宽度1px
      */
-//    public static RecyclerView.ItemDecoration getHorizontalDivider() {
-//        return new ItemGridHorizontalDivider();
-//    }
+    public static RecyclerView.ItemDecoration getHorizontalDivider() {
+        return new ItemStaggeredGridHorizontalDivider();
+    }
 
     /**
-     * @param color     the divider color.
      * @param divHeight the divider height.
      */
-//    public static RecyclerView.ItemDecoration getHorizontalDivider(@ColorInt int color, int divHeight) {
-//        return new ItemGridHorizontalDivider(color, divHeight);
-//    }
+    public static RecyclerView.ItemDecoration getHorizontalDivider(int divHeight) {
+        return new ItemStaggeredGridHorizontalDivider(divHeight);
+    }
 
     /**
-     * GridManager-Vertical 分割线
+     * StaggeredGridManager-Vertical 分割线
      */
     private static class ItemStaggeredGridVerticalDivider extends RecyclerView.ItemDecoration {
 
@@ -186,6 +185,133 @@ public class StaggeredGridLayoutManagerDivider {
                 }
             }
 
+        }
+
+    }
+
+    /**
+     * StaggeredGridManager-Horizontal 分割线
+     */
+    private static class ItemStaggeredGridHorizontalDivider extends RecyclerView.ItemDecoration {
+
+        // 线高度
+        private final int mDividerHeight;
+
+        // 第一个是否是全合并
+        private boolean mFirstIsFull;
+
+        /**
+         * 构造方法，分割线颜色默认透明，宽度1px
+         */
+        public ItemStaggeredGridHorizontalDivider() {
+            this(1);
+        }
+
+        /**
+         * 构造方法
+         *
+         * @param divHeight the divider height.
+         */
+        public ItemStaggeredGridHorizontalDivider(int divHeight) {
+            mDividerHeight = divHeight;
+        }
+
+
+        @Override
+        public final void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
+
+            RecyclerView.Adapter adapter = parent.getAdapter();
+
+            // 获取当前的position
+            int itemPosition = parent.getChildAdapterPosition(view);
+
+            // 获取布局管理器
+            RecyclerView.LayoutManager layoutManager = parent.getLayoutManager();
+            StaggeredGridLayoutManager staggeredGridLayoutManager = (StaggeredGridLayoutManager) layoutManager;
+            // 获取设置的每列的item个数
+            int spanCount = staggeredGridLayoutManager.getSpanCount();
+            // 当前position的spanSize,瀑布流与Grid区别是 只能所有合并 或者不合并
+            StaggeredGridLayoutManager.LayoutParams params = (StaggeredGridLayoutManager.LayoutParams) view.getLayoutParams();
+            int spanSize = params.isFullSpan() ? spanCount : 1;
+            // 当前position在列中的位置 == 0 表示此列的最顶端
+            // eg. 当前每列3个，position = 0 占2个，position = 1 占1个，position... 占1个
+            // 则position = 0 的 spanIndex 为 0，position = 1 的 spanIndex 为 2，
+            // position = 2 的 spanIndex 为 0，position = 3 的 spanIndex 为 1，position = 4 的 spanIndex 为 2
+            int spanIndex = params.getSpanIndex();
+
+            if (adapter instanceof BaseListAdapter) {
+
+                // 头布局
+                int headerLayoutCount = ((BaseListAdapter) adapter).isCanvasHeader() ? 1 : 0;
+                // 真实数据源长度
+                int attachDataSize = ((BaseListAdapter) adapter).getAttachDataSize();
+
+                // 除去头布局的第一个判断是否是全合并
+                if (itemPosition - headerLayoutCount == 0) {
+                    mFirstIsFull = spanSize == spanCount;
+                }
+
+                // 是否达到数据源的第二行
+                boolean rowDataTwo = false;
+                if (headerLayoutCount == 1) {
+                    // 有头布局
+                    if (itemPosition > 0) {
+                        // 数据源开始的位置
+                        if (mFirstIsFull) {
+                            if (itemPosition != 1)
+                                rowDataTwo = true;
+                        } else {
+                            if (itemPosition - 1 > spanIndex)
+                                rowDataTwo = true;
+                        }
+                    }
+                } else {
+                    // 无头布局
+                    if (mFirstIsFull) {
+                        if (itemPosition != 0)
+                            rowDataTwo = true;
+                    } else {
+                        if (itemPosition > spanIndex)
+                            rowDataTwo = true;
+                    }
+                }
+
+                // 每个Item左侧加一个线高（实际数据源第2列Item开始，且到真实数据源的最后一个Item）
+                if (rowDataTwo && itemPosition < attachDataSize + headerLayoutCount)
+                    outRect.left = mDividerHeight;
+
+                if (itemPosition >= headerLayoutCount) {
+                    if (spanSize != spanCount) {
+                        // 绘制上下偏移
+                        outRect.top = spanIndex * mDividerHeight / spanCount;
+                        outRect.bottom = mDividerHeight - (spanIndex + spanSize) * mDividerHeight / spanCount;
+                    }
+                }
+
+            } else {
+
+                if (spanSize != spanCount) {
+                    // 绘制上下偏移
+                    outRect.top = spanIndex * mDividerHeight / spanCount;
+                    outRect.bottom = mDividerHeight - (spanIndex + spanSize) * mDividerHeight / spanCount;
+                }
+
+                if (itemPosition == 0) {
+                    mFirstIsFull = spanSize == spanCount;
+                }
+
+                // 瀑布流只有 全合并 和 全不合并的情况
+                // 首个全合并 只要itemPosition != 0 就画左侧
+                // 首个不是全合并 只要 itemPosition > spanIndex 就画左侧
+                if (mFirstIsFull) {
+                    if (itemPosition != 0)
+                        outRect.left = mDividerHeight;
+                } else {
+                    if (itemPosition > spanIndex)
+                        outRect.left = mDividerHeight;
+                }
+
+            }
         }
 
     }
