@@ -2,7 +2,7 @@
 
  通用适配器
 
- [![](https://github.com/wong1988/EasyAdapter/blob/main/img/preview.gif)
+ ![](https://github.com/wong1988/EasyAdapter/blob/main/img/preview.gif)
 
  Step 1. Add it in your root build.gradle at the end of repositories:
  ```
