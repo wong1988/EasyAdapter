@@ -36,4 +36,10 @@
         android:onClick="staggeredGridManager_vertical"
         android:text="垂直瀑布流" />
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="staggeredGridManager_horizontal"
+        android:text="水平瀑布流" />
+
 </LinearLayout>

@@ -33,4 +33,8 @@ public class MainActivity extends AppCompatActivity {
     public void staggeredGridManager_vertical(View view) {
         startActivity(new Intent(this, StaggeredGridVerticalActivity.class));
     }
+
+    public void staggeredGridManager_horizontal(View view) {
+        startActivity(new Intent(this, StaggeredGridHorizontalActivity.class));
+    }
 }
