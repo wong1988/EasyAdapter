@@ -28,7 +28,7 @@ public class StaggeredGridVerticalActivity extends AppCompatActivity {
         rv = findViewById(R.id.rv);
         StaggeredGridLayoutManager manager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         rv.setLayoutManager(manager);
-        rv.addItemDecoration(StaggeredGridLayoutManagerDivider.getVerticalDivider());
+        rv.addItemDecoration(StaggeredGridLayoutManagerDivider.getVerticalDivider(20));
 
         adapter = new StaggeredVerticalAdapter(this);
         rv.setAdapter(adapter);
@@ -43,7 +43,7 @@ public class StaggeredGridVerticalActivity extends AppCompatActivity {
         menu.add(1, 3, 4, "删除头布局中的第一个view");
         menu.add(1, 4, 5, "清空脚布局");
         menu.add(1, 5, 6, "删除脚布局中的第一个view");
-        menu.add(1, 6, 7, "20高分割线");
+        menu.add(1, 6, 7, "2高分割线");
         menu.add(1, 7, 8, "设置头布局的宽高[MATCH_P..，50]");
         menu.add(1, 8, 9, "设置脚布局的宽高[MATCH_P..，50]");
         menu.add(1, 9, 10, "追加数据");
@@ -64,20 +64,17 @@ public class StaggeredGridVerticalActivity extends AppCompatActivity {
                 adapter.removeAllHeaders();
                 break;
             case 3:
-                rv.scrollToPosition(0);
                 adapter.removeHeader(0);
                 break;
             case 4:
-                rv.scrollToPosition(adapter.getItemCount() - 1);
                 adapter.removeAllFooters();
                 break;
             case 5:
-                rv.scrollToPosition(adapter.getItemCount() - 1);
                 adapter.removeFooter(0);
                 break;
             case 6:
                 adapter.removeAllItemDecoration();
-                rv.addItemDecoration(StaggeredGridLayoutManagerDivider.getVerticalDivider(20));
+                rv.addItemDecoration(StaggeredGridLayoutManagerDivider.getVerticalDivider(2));
                 break;
             case 7:
                 adapter.setHeaderLayoutParams(MATCH_PARENT, 50);

@@ -24,7 +24,7 @@ import io.github.wong1988.adapter.attr.LoadState;
 import io.github.wong1988.adapter.holder.RecyclerViewHolder;
 
 
-public class StaggeredVerticalAdapter extends SimpleListAdapter<StaggeredBean> {
+public class StaggeredHorizontalAdapter extends SimpleListAdapter<StaggeredBean> {
 
     private static List<StaggeredBean> list;
 
@@ -70,8 +70,8 @@ public class StaggeredVerticalAdapter extends SimpleListAdapter<StaggeredBean> {
     }
 
 
-    public StaggeredVerticalAdapter(Context context) {
-        super(context, R.layout.item, false, list);
+    public StaggeredHorizontalAdapter(Context context) {
+        super(context, R.layout.item2, false, list);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.P)
@@ -105,7 +105,7 @@ public class StaggeredVerticalAdapter extends SimpleListAdapter<StaggeredBean> {
 
     public void appendData() {
         setLoadState(LoadState.LOADING);
-        handler.sendEmptyMessageDelayed(1, 1000);
+        handler.sendEmptyMessageDelayed(1, 2000);
     }
 
     @Override

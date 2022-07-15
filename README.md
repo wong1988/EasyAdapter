@@ -14,7 +14,7 @@
  Step 2. Add the dependency
  ```
  dependencies {
-     implementation 'com.github.wong1988:EasyAdapter:1.1.2'
+     implementation 'com.github.wong1988:EasyAdapter:1.2.0'
      // 动画插件包
      implementation 'com.airbnb.android:lottie:4.2.1'
  }
@@ -22,16 +22,18 @@
 
 
  ### BaseAdapter(RecyclerView适配器) | [查看使用方式](https://github.com/wong1988/EasyAdapter/blob/main/RecyclerViewAdapter-README.md)
- ### LinearLayoutManagerDivider(RecyclerView垂直布局管理器分割线)/GridLayoutManagerDivider(RecyclerView网格布局管理器分割线) | [查看使用方式](https://github.com/wong1988/EasyAdapter/blob/main/XxxLayoutManagerDivider-README.md)
+ ### LinearLayoutManagerDivider(RecyclerView垂直布局管理器分割线)/GridLayoutManagerDivider(RecyclerView网格布局管理器分割线)/StaggeredGridLayoutManagerDivider(RecyclerView流式布局管理器分割线) | [查看使用方式](https://github.com/wong1988/EasyAdapter/blob/main/XxxLayoutManagerDivider-README.md)
 
 
  ## Change Log
  
-  1.1.2:
+  1.2.0:
 
  * 新增删除所有分割线的方法
  * 修复添加头、脚布局部分情况闪退的问题
  * 头、脚布局支持自定义宽高
+ * 新增StaggeredGridLayoutManager -> vertical 分割线
+ * 新增StaggeredGridLayoutManager -> Horizontal 分割线
 
   1.1.0:
 
