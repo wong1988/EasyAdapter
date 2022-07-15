@@ -61,7 +61,6 @@ public class StaggeredGridVerticalActivity extends AppCompatActivity {
                 adapter.addFooter();
                 break;
             case 2:
-                rv.scrollToPosition(0);
                 adapter.removeAllHeaders();
                 break;
             case 3:
