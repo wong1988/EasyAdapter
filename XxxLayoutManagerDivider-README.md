@@ -8,9 +8,11 @@
 // LayoutManager - > 水平方向
 LinearLayoutManagerDivider.getHorizontalDivider()
 GridLayoutManagerDivider.getHorizontalDivider()
+StaggeredGridLayoutManagerDivider.getHorizontalDivider()
 // LayoutManager - > 垂直方向
 LinearLayoutManagerDivider.getVerticalDivider()
 GridLayoutManagerDivider.getVerticalDivider()
+StaggeredGridLayoutManagerDivider.getVerticalDivider()
 ```
 
 ## About
