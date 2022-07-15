@@ -438,6 +438,7 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerVi
 
     /**
      * 设置头布局的宽高
+     * 流式布局特殊：头布局设计到合并充满，部分情况下 宽高可能有一个值会不生效
      */
     public final void setHeaderLayoutParams(int width, int height) {
 
@@ -559,6 +560,7 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerVi
 
     /**
      * 设置脚布局的宽高
+     * 流式布局特殊：脚布局设计到合并充满，部分情况下 宽高可能有一个值会不生效
      */
     public final void setFooterLayoutParams(int width, int height) {
 

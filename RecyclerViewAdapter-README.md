@@ -31,7 +31,7 @@ getAttachXXX()
 addHeaderView() addFooterView()
 // 移除头、脚布局
 removeHeader() removeAllHeaders() removeFooter() removeAllFooters()
-// 设置头、脚布局的宽高
+// 设置头、脚布局的宽高 ，流式布局部分情况下 宽高某一个属性可能会不生效
 setHeaderLayoutParams() setFooterLayoutParams()
 // 设置加载状态的资源，可以是drawable/mipmap下的图片资源，也可以是raw下的json动画资源
 // 自适应图片大小，最大50dp
@@ -74,6 +74,7 @@ setLoadState()
 1. 当RecyclerView与Adapter绑定时，内部会给RecyclerView设置滚动监听addOnScrollListener()，进行上拉监听管理。如需使用滚动监听进行一些自定义操作，请调用EasyAdapter的addOnScrollListener()进行监听【而非RecyclerView的addOnScrollListener()】。
 2. setAdapter()前需要先设置LayoutManager，内部会根据LayoutManger进行选择适当的加载状态脚布局【横向、纵向】
 3. 设置LayoutManager时千万不要设置setSpanSizeLookup()，请重写继承的适配器方法getSpanSize()进行设置
-4. 内部对getItemCount()进行了处理，所以适配器参数返回的position并不一定是真实的position，如果使用notifyItemRangeChanged()，notifyItemInserted()等方法可能达不到预期的效果（notifyDataSetChanged方法不影响）。如果一定要使用，可通过getRealPosition()返回真正的position，再去调用notifyXXX()方法。推荐使用addData()，remove()，update()等方法，方法内部会触发自动刷新适配器。
-5. 添加头布局（默认为垂直方向），头布局宽默认为 match_parent，反之水平方向高度默认为 match_parent(注：默认值在整个适配器生命周期中仅会生效一次)，可调用方法进行更改宽高，脚布局同理
-6. 头脚布局以最后一次设置的方向为最终效果
+4. 重写onViewAttachedToWindow2()方法，可对瀑布流布局实现类似setSpanSizeLookup()效果
+5. 内部对getItemCount()进行了处理，所以适配器参数返回的position并不一定是真实的position，如果使用notifyItemRangeChanged()，notifyItemInserted()等方法可能达不到预期的效果（notifyDataSetChanged方法不影响）。如果一定要使用，可通过getRealPosition()返回真正的position，再去调用notifyXXX()方法。推荐使用addData()，remove()，update()等方法，方法内部会触发自动刷新适配器。
+6. 添加头布局（默认为垂直方向），头布局宽默认为 match_parent，反之水平方向高度默认为 match_parent(注：默认值在整个适配器生命周期中仅会生效一次)，可调用方法进行更改宽高，脚布局同理
+7. 头脚布局以最后一次设置的方向为最终效果
