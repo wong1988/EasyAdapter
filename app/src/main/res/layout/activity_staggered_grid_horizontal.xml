@@ -3,13 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#8BC34A"
+    android:background="#F1F2F3"
     tools:context=".StaggeredGridHorizontalActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:background="#00BCD4" />
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:padding="10dp" />
 
 </LinearLayout>
