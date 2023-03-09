@@ -1,5 +1,7 @@
 package io.github.adapter.example;
 
+import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
+
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,8 +14,6 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import io.github.adapter.example.adapter.StaggeredHorizontalAdapter;
 import io.github.wong1988.adapter.attr.LoadState;
 import io.github.wong1988.adapter.divider.StaggeredGridLayoutManagerDivider;
-
-import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 public class StaggeredGridHorizontalActivity extends AppCompatActivity {
 

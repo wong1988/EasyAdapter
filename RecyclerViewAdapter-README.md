@@ -1,21 +1,27 @@
 # BaseListAdapter
- 一个通用简易的RecyclerView适配器，单布局可以使用SimpleListAdapter
- 
- ## Method and Attribute
+
+一个通用简易的RecyclerView适配器，单布局可以使用SimpleListAdapter
+
+## Method and Attribute
 
 构造方法
+
 ```
 // 默认支持上拉加载，如果列表无分页的功能，推荐使用2参构造，并传false
 BaseListAdapter(Context context)
 // 参数2：是否支持上拉加载
 BaseListAdapter(Context context, boolean enableLoadMore)
 ```
+
 实现方法
+
 ```
 // position只是在数据源中的位置，非实际位置（包含头布局时）
 onBindViewHolders(RecyclerViewHolder holder, int viewType, T t, int position);
 ```
+
 常用方法
+
 ```
 // 添加数据
 addData()
@@ -50,6 +56,7 @@ setEmptyRes(int emptyRes)
 // 设置空数据状态文字描述
 setEmptyText()
 ```
+
 ```
 // 设置加载状态
 // 提供了 加载完成, 加载中, 加载到底, 加载出错, 无数据 几种状态
@@ -58,6 +65,7 @@ setLoadState()
 ```
 
 监听器
+
 ```
 1. OnItemClickListener() item的点击事件
 2. OnItemLongClickListener() item的长按点击事件
@@ -66,15 +74,20 @@ setLoadState()
 5. OnStateFooterClickListener(LoadState state) 加载状态脚布局点击的监听事件
 ```
 
-
 ## About
 
-
 注意：
-1. 当RecyclerView与Adapter绑定时，内部会给RecyclerView设置滚动监听addOnScrollListener()，进行上拉监听管理。如需使用滚动监听进行一些自定义操作，请调用EasyAdapter的addOnScrollListener()进行监听【而非RecyclerView的addOnScrollListener()】。
+
+1. 当RecyclerView与Adapter绑定时，内部会给RecyclerView设置滚动监听addOnScrollListener()
+   ，进行上拉监听管理。如需使用滚动监听进行一些自定义操作，请调用EasyAdapter的addOnScrollListener()
+   进行监听【而非RecyclerView的addOnScrollListener()】。
 2. setAdapter()前需要先设置LayoutManager，内部会根据LayoutManger进行选择适当的加载状态脚布局【横向、纵向】
 3. 设置LayoutManager时千万不要设置setSpanSizeLookup()，请重写继承的适配器方法getSpanSize()进行设置
 4. 重写onViewAttachedToWindow2()方法，可对瀑布流布局实现类似setSpanSizeLookup()效果
-5. 内部对getItemCount()进行了处理，所以适配器onBindViewHolders()参数返回的position并不一定是真实的position，如果使用notifyItemRangeChanged()，notifyItemInserted()等方法可能达不到预期的效果（notifyDataSetChanged方法不影响）。如果一定要使用，可通过getRealPosition()返回真正的position，再去调用notifyXXX()方法。推荐使用addData()，remove()，update()等方法，方法内部会触发自动刷新适配器。
-6. 添加头布局（默认为垂直方向），头布局宽默认为 match_parent，反之水平方向高度默认为 match_parent(注：默认值在整个适配器生命周期中仅第一次生效)，可调用方法进行更改宽高，脚布局同理
+5. 内部对getItemCount()进行了处理，所以适配器onBindViewHolders()
+   参数返回的position并不一定是真实的position，如果使用notifyItemRangeChanged()，notifyItemInserted()
+   等方法可能达不到预期的效果（notifyDataSetChanged方法不影响）。如果一定要使用，可通过getRealPosition()
+   返回真正的position，再去调用notifyXXX()方法。推荐使用addData()，remove()，update()等方法，方法内部会触发自动刷新适配器。
+6. 添加头布局（默认为垂直方向），头布局宽默认为 match_parent，反之水平方向高度默认为 match_parent(注：默认值在整个适配器生命周期中仅第一次生效)
+   ，可调用方法进行更改宽高，脚布局同理
 7. 头脚布局以最后一次设置的方向为最终效果

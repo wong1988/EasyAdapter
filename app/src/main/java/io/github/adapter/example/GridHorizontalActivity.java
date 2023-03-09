@@ -1,5 +1,8 @@
 package io.github.adapter.example;
 
+import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
+import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
+
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
@@ -13,9 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import io.github.adapter.example.adapter.LinearHorizontalAdapter;
 import io.github.wong1988.adapter.attr.LoadState;
 import io.github.wong1988.adapter.divider.GridLayoutManagerDivider;
-
-import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
-import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 public class GridHorizontalActivity extends AppCompatActivity {
 

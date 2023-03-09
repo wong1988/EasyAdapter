@@ -1,5 +1,7 @@
 package io.github.adapter.example;
 
+import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
+
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,8 +15,6 @@ import io.github.adapter.example.adapter.StaggeredVerticalAdapter;
 import io.github.wong1988.adapter.attr.LoadState;
 import io.github.wong1988.adapter.divider.StaggeredGridLayoutManagerDivider;
 import io.github.wong1988.adapter.listener.OnLoadMoreListener;
-
-import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 
 public class StaggeredGridVerticalActivity extends AppCompatActivity {
 
